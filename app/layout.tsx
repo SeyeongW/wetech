@@ -1,6 +1,10 @@
+import { Inter, Noto_Sans_KR } from 'next/font/google';
 import "./globals.css";
 import Shell from "./Shell";
 import ClientEffects from "./ClientEffects";
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const notoSansKr = Noto_Sans_KR({ subsets: ['latin'], variable: '--font-noto-sans-kr' });
 
 export const metadata = {
   title: "WETECH | Outdoor Smart Thermal Bench",
@@ -13,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
+    <html lang="ko" className={`${inter.variable} ${notoSansKr.variable}`}>
       <body>
         <Shell>{children}</Shell>
         <ClientEffects />

@@ -6,7 +6,7 @@ export default function SpecsPage() {
       <div className="statgrid">
         <div className="stat reveal">
           <div className="stat__title">온도 제어 범위</div>
-          <div className="stat__desc">예: -10°C ~ 45°C (모델별 상이)</div>
+          <div className="stat__desc">예: 0°C ~ 45°C (모델별 상이)</div>
         </div>
         <div className="stat reveal">
           <div className="stat__title">제어 방식</div>
