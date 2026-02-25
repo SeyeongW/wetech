@@ -4,7 +4,9 @@ export default function HomePage() {
   return (
     <>
       <section className="hero">
-        <img className="hero__bg parallax" src="/images/hero.jpg" alt="Smart Thermal Bench" />
+        <div className="hero__bg-container">
+          <div className="hero__bg parallax" aria-hidden="true"></div>
+        </div>
         <div className="hero__overlay"></div>
 
         <div className="hero__content">
