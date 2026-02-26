@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { siteConfig } from "../siteConfig";
 
 export function Footer() {
   return (
@@ -52,15 +53,19 @@ export function Footer() {
             <ul className="space-y-2">
               <li className="flex items-center space-x-2 text-sm">
                 <Phone size={16} />
-                <span>02-1234-5678</span>
+                <span>{siteConfig.contact.phone}</span>
               </li>
               <li className="flex items-center space-x-2 text-sm">
                 <Mail size={16} />
-                <span>info@techpro.com</span>
+                <span>{siteConfig.contact.email}</span>
               </li>
               <li className="flex items-start space-x-2 text-sm">
                 <MapPin size={16} className="mt-0.5" />
-                <span>서울특별시 강남구<br />테헤란로 123</span>
+                <span>
+                  {siteConfig.contact.address.line1}
+                  <br />
+                  {siteConfig.contact.address.line2}
+                </span>
               </li>
             </ul>
           </div>

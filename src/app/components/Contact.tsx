@@ -1,7 +1,10 @@
 import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 import { useState } from "react";
+import { siteConfig } from "../siteConfig";
 
 export function Contact() {
+  const addressFull = `${siteConfig.contact.address.line1} ${siteConfig.contact.address.line2}`;
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -33,20 +36,20 @@ export function Contact() {
     {
       icon: <Phone className="w-6 h-6 text-blue-600" />,
       title: "전화",
-      content: "02-1234-5678",
+      content: siteConfig.contact.phone,
       subContent: "평일 09:00 - 18:00",
     },
     {
       icon: <Mail className="w-6 h-6 text-blue-600" />,
       title: "이메일",
-      content: "info@techpro.com",
+      content: siteConfig.contact.email,
       subContent: "24시간 이내 답변",
     },
     {
       icon: <MapPin className="w-6 h-6 text-blue-600" />,
       title: "오시는 길",
-      content: "대전광역시 유성구",
-      subContent: "학하남로",
+      content: siteConfig.contact.address.line1,
+      subContent: siteConfig.contact.address.line2,
     },
     {
       icon: <Clock className="w-6 h-6 text-blue-600" />,
@@ -208,7 +211,7 @@ export function Contact() {
                   <div className="text-center">
                     <MapPin className="w-12 h-12 mx-auto mb-2 text-gray-400" />
                     <p>지도 위치</p>
-                    <p className="text-sm">서울특별시 강남구 테헤란로 123</p>
+                    <p className="text-sm">{addressFull}</p>
                   </div>
                 </div>
               </div>
@@ -233,7 +236,7 @@ export function Contact() {
                 긴급한 문의사항이 있으시면 고객센터로 직접 전화주세요.
               </p>
               <a
-                href="tel:02-1234-5678"
+                href={`tel:${siteConfig.contact.phone}`}
                 className="inline-block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
                 고객센터 전화하기
