@@ -237,6 +237,666 @@
     background-size: 34px 34px;
   }
 
+  .spectral-page {
+    background: #2e3842;
+    color: #ffffff;
+    font-family: "Open Sans", "Noto Sans KR", sans-serif;
+    min-height: calc(100vh - 3.5rem);
+  }
+
+  .spectral-inner {
+    margin-inline: auto;
+    width: min(78rem, 100%);
+  }
+
+  .spectral-section {
+    padding: 4.5rem 1.25rem 3.5rem;
+  }
+
+  .spectral-hero {
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 7rem 1.5rem 5rem;
+    text-align: center;
+  }
+
+  .spectral-hero::before {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.68)), var(--hero-image);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    content: "";
+  }
+
+  .spectral-hero::after {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(46, 56, 66, 0) 0%, rgba(46, 56, 66, 0.76) 100%),
+      radial-gradient(circle at 20% 25%, rgba(255, 255, 255, 0.12), transparent 42%);
+    content: "";
+  }
+
+  .spectral-hero > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .spectral-title {
+    display: inline-block;
+    margin-bottom: 1.1rem;
+    padding: 0.5rem 1.1rem;
+    font-size: clamp(1.9rem, 4vw, 3.4rem);
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .spectral-title::before,
+  .spectral-title::after {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #fff;
+    content: "";
+  }
+
+  .spectral-title::before {
+    margin-bottom: 0.45rem;
+  }
+
+  .spectral-title::after {
+    margin-top: 0.45rem;
+  }
+
+  .spectral-kicker {
+    letter-spacing: 0.23em;
+    text-transform: uppercase;
+  }
+
+  .spectral-subtitle {
+    color: rgba(255, 255, 255, 0.84);
+    letter-spacing: 0.08em;
+  }
+
+  .spectral-hero-product {
+    margin: 2.2rem auto 0;
+    width: min(56rem, 100%);
+    border-radius: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background:
+      linear-gradient(170deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02)),
+      rgba(18, 22, 27, 0.36);
+    box-shadow: 0 24px 46px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    padding: 1.25rem;
+  }
+
+  .spectral-hero-product img {
+    height: auto;
+    width: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.45));
+    transition: transform 0.55s ease;
+  }
+
+  .spectral-hero-product:hover img {
+    transform: translateY(-5px) scale(1.01);
+  }
+
+  .spectral-hero-scroll {
+    margin-top: 1.4rem;
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.78);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.38);
+    padding-bottom: 0.2rem;
+  }
+
+  .spectral-page-header {
+    position: relative;
+    overflow: hidden;
+    padding: 6.6rem 1.25rem 3.6rem;
+    text-align: center;
+  }
+
+  .spectral-page-header::before {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.68)), var(--page-image);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    content: "";
+  }
+
+  .spectral-page-header > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .spectral-page-header .spectral-title {
+    font-size: clamp(1.45rem, 3vw, 2.35rem);
+    letter-spacing: 0.2em;
+  }
+
+  .spectral-wrapper {
+    margin-inline: auto;
+    width: min(78rem, 100%);
+    border-radius: 0.7rem;
+    padding: 3rem 2.2rem 2.5rem;
+  }
+
+  .spectral-wrapper.style1 {
+    background: #d8dde2;
+    color: #1d242a;
+  }
+
+  .spectral-wrapper.style2 {
+    background: #2b3138;
+  }
+
+  .spectral-wrapper.style3 {
+    background: #3a4047;
+  }
+
+  .spectral-wrapper.style4 {
+    background: #1d242a;
+  }
+
+  .spectral-wrapper.style5 {
+    background: #ffffff;
+    color: #2e3842;
+  }
+
+  .spectral-major h2 {
+    margin-bottom: 1.1rem;
+    font-size: clamp(1.45rem, 3vw, 2rem);
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  .spectral-major p {
+    margin: 0;
+    line-height: 1.8;
+  }
+
+  .spectral-spotlight {
+    display: grid;
+    grid-template-columns: 1fr;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.65rem;
+    background: rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+  }
+
+  .spectral-spotlight + .spectral-spotlight {
+    margin-top: 1rem;
+  }
+
+  .spectral-spotlight .image {
+    position: relative;
+    min-height: 16rem;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.22);
+  }
+
+  .spectral-spotlight .image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .spectral-spotlight .content {
+    padding: 2rem;
+  }
+
+  .spectral-spotlight .content h3 {
+    margin-bottom: 0.8rem;
+    font-size: 1.08rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .spectral-spotlight .content p {
+    color: rgba(255, 255, 255, 0.84);
+    line-height: 1.75;
+  }
+
+  .spectral-card-list {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .spectral-card {
+    border-radius: 0.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 1rem 1.1rem;
+  }
+
+  .spectral-card h4 {
+    margin-bottom: 0.25rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .spectral-card p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .spectral-page .style5 .spectral-spotlight {
+    border-color: rgba(46, 56, 66, 0.16);
+    background: rgba(46, 56, 66, 0.04);
+  }
+
+  .spectral-page .style5 .spectral-spotlight .content p {
+    color: rgba(46, 56, 66, 0.8);
+  }
+
+  .spectral-page .style5 .spectral-card {
+    border-color: rgba(46, 56, 66, 0.14);
+    background: rgba(46, 56, 66, 0.04);
+  }
+
+  .spectral-page .style5 .spectral-card p {
+    color: rgba(46, 56, 66, 0.8);
+  }
+
+  .spectral-page .style1 .spectral-card {
+    border-color: rgba(46, 56, 66, 0.16);
+    background: rgba(255, 255, 255, 0.42);
+  }
+
+  .spectral-page .style1 .spectral-card h4 {
+    color: #1d242a;
+  }
+
+  .spectral-page .style1 .spectral-card p {
+    color: rgba(29, 36, 42, 0.82);
+  }
+
+  .spectral-feature-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  .spectral-feature-item {
+    border-radius: 0.65rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    padding: 1.15rem 1.2rem;
+  }
+
+  .spectral-feature-item h4 {
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .spectral-feature-item p {
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .spectral-page .style5 .spectral-feature-item {
+    border-color: rgba(46, 56, 66, 0.16);
+    background: rgba(46, 56, 66, 0.04);
+  }
+
+  .spectral-page .style5 .spectral-feature-item p {
+    color: rgba(46, 56, 66, 0.82);
+  }
+
+  .spectral-usage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    aspect-ratio: 4 / 3;
+    border: 1px solid rgba(46, 56, 66, 0.16);
+    border-radius: 0.65rem;
+    background: #f0f2f4;
+    overflow: hidden;
+    padding: 0.5rem;
+  }
+
+  .spectral-usage-grid figure {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.45rem;
+  }
+
+  .spectral-usage-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .spectral-usage-grid figure:hover img {
+    transform: scale(1.04);
+  }
+
+  .spectral-usage-grid figcaption {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 0.4rem 0.55rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.68));
+  }
+
+  .spectral-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    padding: 0.72rem 1.45rem;
+    font-size: 0.83rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .spectral-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .spectral-btn.dark {
+    border-color: rgba(46, 56, 66, 0.55);
+    color: #2e3842;
+  }
+
+  .spectral-btn.dark:hover {
+    background: rgba(46, 56, 66, 0.08);
+  }
+
+  .spectral-doc-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+  }
+
+  .spectral-doc {
+    border: 1px solid rgba(46, 56, 66, 0.15);
+    border-radius: 0.5rem;
+    background: #f6f7f8;
+    padding: 0.6rem;
+  }
+
+  .spectral-doc img {
+    width: 100%;
+    height: 10rem;
+    object-fit: contain;
+    background: #ffffff;
+  }
+
+  .spectral-doc figcaption {
+    margin-top: 0.45rem;
+    font-size: 0.72rem;
+    color: rgba(46, 56, 66, 0.8);
+  }
+
+  .spectral-form-grid {
+    display: grid;
+    gap: 1.1rem;
+  }
+
+  .spectral-band {
+    padding: 0;
+  }
+
+  .spectral-strip {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .spectral-strip.dark {
+    background: #2f3945;
+    color: #ffffff;
+  }
+
+  .spectral-strip.muted {
+    background: #26303b;
+    color: #ffffff;
+  }
+
+  .spectral-strip .media {
+    min-height: 20rem;
+    overflow: hidden;
+  }
+
+  .spectral-strip .media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .spectral-strip .content {
+    padding: 3.25rem 2rem;
+  }
+
+  .spectral-strip .content h2 {
+    margin-bottom: 1.15rem;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    line-height: 1.5;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  .spectral-strip .content p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.86);
+    line-height: 1.9;
+  }
+
+  .spectral-line-list {
+    margin-top: 1.6rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .spectral-line-list li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.8rem 0;
+  }
+
+  .spectral-line-list h4 {
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  .spectral-line-list p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .spectral-cert-wall {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+    padding: 0.45rem;
+    background: #1f2730;
+  }
+
+  .spectral-cert-wall figure {
+    margin: 0;
+    overflow: hidden;
+    background: #10151b;
+  }
+
+  .spectral-field label {
+    margin-bottom: 0.4rem;
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(46, 56, 66, 0.86);
+  }
+
+  .spectral-field input,
+  .spectral-field textarea {
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(46, 56, 66, 0.22);
+    background: rgba(46, 56, 66, 0.05);
+    color: #2e3842;
+    padding: 0.72rem 0.8rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .spectral-field input:focus,
+  .spectral-field textarea:focus {
+    border-color: rgba(46, 56, 66, 0.5);
+    background: rgba(46, 56, 66, 0.08);
+    outline: none;
+  }
+
+  .spectral-contact-info {
+    border: 1px solid rgba(46, 56, 66, 0.16);
+    border-radius: 0.6rem;
+    background: rgba(46, 56, 66, 0.05);
+    padding: 1.1rem 1.15rem;
+  }
+
+  .spectral-contact-info li + li {
+    margin-top: 0.65rem;
+  }
+
+  .scroll-follow {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--scroll-delay, 0s);
+    will-change: opacity, transform;
+  }
+
+  .scroll-follow.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-delay-1 {
+    transition-delay: 0.08s;
+  }
+
+  .scroll-delay-2 {
+    transition-delay: 0.16s;
+  }
+
+  .scroll-delay-3 {
+    transition-delay: 0.24s;
+  }
+
+  .spectral-tech-list {
+    border-top: 1px solid rgba(46, 56, 66, 0.18);
+    margin-top: 1rem;
+  }
+
+  .spectral-tech-row {
+    display: grid;
+    gap: 0.35rem;
+    border-bottom: 1px solid rgba(46, 56, 66, 0.15);
+    padding: 0.9rem 0;
+  }
+
+  .spectral-tech-row dt {
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(46, 56, 66, 0.84);
+  }
+
+  .spectral-tech-row dd {
+    margin: 0;
+    color: rgba(46, 56, 66, 0.84);
+    line-height: 1.75;
+  }
+
+  @media (min-width: 900px) {
+    .spectral-spotlight {
+      grid-template-columns: 45% 55%;
+    }
+
+    .spectral-strip {
+      grid-template-columns: 44% 56%;
+    }
+
+    .spectral-strip.reverse .media {
+      order: 2;
+    }
+
+    .spectral-strip.reverse .content {
+      order: 1;
+    }
+
+    .spectral-strip .content {
+      padding: 4.4rem 4.2rem;
+    }
+
+    .spectral-cert-wall {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      padding: 0.7rem;
+    }
+
+    .spectral-card-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .spectral-feature-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .spectral-doc-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 899px) {
+    .spectral-wrapper {
+      padding: 2.25rem 1.2rem 2rem;
+    }
+
+    .spectral-hero {
+      min-height: auto;
+      padding: 6.5rem 1rem 4rem;
+    }
+
+    .spectral-hero-product {
+      margin-top: 1.6rem;
+      padding: 0.85rem;
+    }
+  }
+
   @keyframes reveal-up {
     from {
       opacity: 0;

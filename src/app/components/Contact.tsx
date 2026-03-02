@@ -1,14 +1,20 @@
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+﻿import type { CSSProperties } from "react";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { siteConfig } from "../siteConfig";
-import brochureUsage from "../../assets/smart-bench/brochure-usage.png";
 
-const applications = [
-  "공원 및 정원",
-  "대중교통 대기 공간",
-  "관광지 및 공공시설",
-  "국립공원 및 보행 동선",
+const inquiryScopes = [
+  "도입/구축 문의",
+  "기술 제휴 및 협업 문의",
+  "유지보수 및 운영 지원 문의",
+  "공공 프로젝트 제안 문의",
+];
+
+const processSteps = [
+  "문의 접수: 요구사항 및 일정 확인",
+  "초기 검토: 적용 가능 범위/제약 검토",
+  "회신 및 협의: 상세 범위, 일정, 비용 논의",
+  "진행 확정: 담당자 배정 및 실행 계획 안내",
 ];
 
 export function Contact() {
@@ -31,131 +37,129 @@ export function Contact() {
     setTimeout(() => setSubmitted(false), 2500);
   };
 
+  const headerStyle = { "--page-image": "none" } as CSSProperties;
+
   return (
-    <div className="bg-[#f4f4f5] px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl space-y-8">
-        <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm lg:p-10">
-          <p className="font-display mb-3 text-sm tracking-[0.14em] text-slate-500">CONTACT</p>
-          <h1 className="text-4xl sm:text-5xl">문의</h1>
-          <p className="mt-5 max-w-4xl leading-relaxed text-slate-600">
-            설치 대상 공간, 운영 시간, 기대 효과를 알려주시면 현장 조건에 맞춘 Smart Bench 구성안을 제안드립니다.
+    <div className="spectral-page">
+      <section className="spectral-page-header" style={headerStyle}>
+        <div className="spectral-inner">
+          <p className="spectral-kicker text-xs text-white/75 scroll-follow">Contact WETECH</p>
+          <h1 className="spectral-title scroll-follow scroll-delay-1">문의</h1>
+          <p className="spectral-subtitle mx-auto mt-4 max-w-3xl text-sm sm:text-base scroll-follow scroll-delay-2">
+            프로젝트 목적과 요구사항을 남겨주시면 담당자가 검토 후 회신드립니다.
           </p>
-        </section>
+        </div>
+      </section>
 
-        <section className="grid grid-cols-1 gap-8 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm lg:grid-cols-2 lg:p-10">
-          <div className="group overflow-hidden rounded-2xl">
-            <ImageWithFallback
-              src={brochureUsage}
-              alt="Smart Bench 카탈로그 활용 분야 페이지"
-              className="h-full min-h-[420px] w-full object-cover object-top transition duration-700 group-hover:scale-[1.03]"
-            />
+      <section className="spectral-section pt-0">
+        <div className="spectral-wrapper style5 scroll-follow">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+            <div className="scroll-follow">
+              <header className="spectral-major">
+                <h2>문의 범위</h2>
+                <p>아래 항목 기준으로 접수되며, 상세 내용은 문의 메시지에 함께 남겨주세요.</p>
+              </header>
+              <dl className="spectral-tech-list">
+                {inquiryScopes.map((scope, index) => (
+                  <div key={scope} className={`spectral-tech-row scroll-follow scroll-delay-${Math.min(index, 3)}`}>
+                    <dt>{`Scope 0${index + 1}`}</dt>
+                    <dd>{scope}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            <div className="scroll-follow scroll-delay-1">
+              <header className="spectral-major">
+                <h2>처리 절차</h2>
+                <p>접수 이후 기본 진행 흐름입니다.</p>
+              </header>
+              <dl className="spectral-tech-list">
+                {processSteps.map((step, index) => (
+                  <div key={step} className={`spectral-tech-row scroll-follow scroll-delay-${Math.min(index, 3)}`}>
+                    <dt>{`Step 0${index + 1}`}</dt>
+                    <dd>{step}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
           </div>
-          <div>
-            <h2 className="text-3xl">활용 분야 및 인증 관점</h2>
-            <p className="mt-4 text-sm leading-relaxed text-slate-600">
-              공공공간 적용에 필요한 기본 자료 검토를 위해 카탈로그 기준 활용 분야와 인증 관련 정보를 함께 제공합니다.
-            </p>
-            <ul className="mt-5 grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {applications.map((item) => (
-                <li key={item} className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700">
-                  {item}
+        </div>
+      </section>
+
+      <section className="spectral-section pt-0">
+        <div className="spectral-wrapper style5 scroll-follow">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <div className="scroll-follow">
+              <header className="spectral-major">
+                <h2>문의하기</h2>
+                <p>담당자가 확인 가능한 연락처와 요청사항을 남겨주세요.</p>
+              </header>
+              <form onSubmit={handleSubmit} className="spectral-form-grid mt-5">
+                <div className="spectral-field scroll-follow">
+                  <label htmlFor="name">이름</label>
+                  <input id="name" name="name" value={formData.name} onChange={handleChange} required />
+                </div>
+
+                <div className="spectral-field scroll-follow scroll-delay-1">
+                  <label htmlFor="email">이메일</label>
+                  <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required />
+                </div>
+
+                <div className="spectral-field scroll-follow scroll-delay-2">
+                  <label htmlFor="phone">연락처</label>
+                  <input id="phone" name="phone" value={formData.phone} onChange={handleChange} />
+                </div>
+
+                <div className="spectral-field scroll-follow scroll-delay-3">
+                  <label htmlFor="message">문의 내용</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+
+                <div className="flex items-center gap-3 scroll-follow scroll-delay-3">
+                  <button type="submit" className="spectral-btn dark">
+                    <Send className="mr-2 h-4 w-4" />
+                    문의 전송
+                  </button>
+                  {submitted && <p className="text-sm text-[#2e3842]/70">문의가 접수되었습니다.</p>}
+                </div>
+              </form>
+            </div>
+
+            <div className="scroll-follow scroll-delay-1">
+              <header className="spectral-major">
+                <h2>연락처 정보</h2>
+                <p>아래 채널로도 직접 문의하실 수 있습니다.</p>
+              </header>
+              <ul className="spectral-contact-info mt-5 text-sm text-[#2e3842]">
+                <li className="flex items-center gap-2">
+                  <Phone className="h-4 w-4" />
+                  {siteConfig.contact.phone}
                 </li>
-              ))}
-            </ul>
+                <li className="flex items-center gap-2">
+                  <Mail className="h-4 w-4" />
+                  {siteConfig.contact.email}
+                </li>
+                <li className="flex items-start gap-2">
+                  <MapPin className="mt-0.5 h-4 w-4" />
+                  <span>
+                    {siteConfig.contact.address.line1}
+                    <br />
+                    {siteConfig.contact.address.line2}
+                  </span>
+                </li>
+              </ul>
+            </div>
           </div>
-        </section>
-
-        <section className="grid grid-cols-1 gap-8 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm lg:grid-cols-2 lg:p-10">
-          <div>
-            <h2 className="text-2xl">문의하기</h2>
-            <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-              <div>
-                <label htmlFor="name" className="mb-2 block text-sm text-slate-700">
-                  이름
-                </label>
-                <input
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full rounded-lg border border-slate-300 px-4 py-2 focus:border-slate-500 focus:outline-none"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="mb-2 block text-sm text-slate-700">
-                  이메일
-                </label>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full rounded-lg border border-slate-300 px-4 py-2 focus:border-slate-500 focus:outline-none"
-                />
-              </div>
-              <div>
-                <label htmlFor="phone" className="mb-2 block text-sm text-slate-700">
-                  연락처
-                </label>
-                <input
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full rounded-lg border border-slate-300 px-4 py-2 focus:border-slate-500 focus:outline-none"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="mb-2 block text-sm text-slate-700">
-                  문의 내용
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={5}
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  className="w-full resize-none rounded-lg border border-slate-300 px-4 py-2 focus:border-slate-500 focus:outline-none"
-                />
-              </div>
-              <button
-                type="submit"
-                className="inline-flex items-center rounded-lg bg-slate-900 px-5 py-2 text-sm font-medium text-white transition hover:bg-black"
-              >
-                <Send className="mr-2 h-4 w-4" />
-                문의 전송
-              </button>
-              {submitted && <p className="text-sm text-slate-600">문의가 접수되었습니다. 확인 후 연락드리겠습니다.</p>}
-            </form>
-          </div>
-
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
-            <h3 className="text-xl">연락처 정보</h3>
-            <ul className="mt-4 space-y-3 text-sm text-slate-700">
-              <li className="flex items-center gap-2">
-                <Phone className="h-4 w-4" />
-                {siteConfig.contact.phone}
-              </li>
-              <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4" />
-                {siteConfig.contact.email}
-              </li>
-              <li className="flex items-start gap-2">
-                <MapPin className="mt-0.5 h-4 w-4" />
-                <span>
-                  {siteConfig.contact.address.line1}
-                  <br />
-                  {siteConfig.contact.address.line2}
-                </span>
-              </li>
-            </ul>
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

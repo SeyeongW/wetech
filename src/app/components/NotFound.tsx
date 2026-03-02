@@ -1,29 +1,24 @@
-import { Link } from "react-router";
-import { Home, AlertCircle } from "lucide-react";
+﻿import { Link } from "react-router";
+import { AlertCircle, Home } from "lucide-react";
 
 export function NotFound() {
   return (
-    <div className="min-h-[70vh] flex items-center justify-center px-4 sm:px-6 lg:px-8">
-      <div className="text-center">
-        <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mb-6">
-          <AlertCircle className="w-10 h-10 text-blue-600" />
+    <div className="spectral-page flex min-h-[70vh] items-center justify-center px-4 py-16">
+      <div className="spectral-wrapper style4 max-w-2xl text-center">
+        <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-white/10">
+          <AlertCircle className="h-8 w-8" />
         </div>
-        <h1 className="text-6xl sm:text-7xl mb-4 text-gray-900">
-          404
-        </h1>
-        <h2 className="text-2xl sm:text-3xl mb-4 text-gray-700">
-          페이지를 찾을 수 없습니다
-        </h2>
-        <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto">
-          요청하신 페이지가 존재하지 않거나 이동되었을 수 있습니다.
+        <h1 className="text-6xl font-bold tracking-[0.2em] text-white">404</h1>
+        <p className="mt-4 text-sm tracking-[0.18em] text-white/70 uppercase">Page Not Found</p>
+        <p className="mx-auto mt-4 max-w-md text-sm text-white/80">
+          요청하신 페이지를 찾을 수 없습니다. 메뉴에서 다른 페이지를 선택해 주세요.
         </p>
-        <Link
-          to="/"
-          className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-        >
-          <Home className="w-5 h-5 mr-2" />
-          홈으로 돌아가기
-        </Link>
+        <div className="mt-8">
+          <Link to="/" className="spectral-btn">
+            <Home className="mr-2 h-4 w-4" />
+            홈으로 이동
+          </Link>
+        </div>
       </div>
     </div>
   );
