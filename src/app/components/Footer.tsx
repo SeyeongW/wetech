@@ -1,66 +1,60 @@
 import { Link } from "react-router";
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { siteConfig } from "../siteConfig";
 
+const quickLinks = [
+  { to: "/", label: "홈" },
+  { to: "/about", label: "소개" },
+  { to: "/products", label: "제품" },
+  { to: "/contact", label: "문의" },
+];
+
 export function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  };
+
   return (
-    <footer className="bg-gray-900 text-gray-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Company Info */}
+    <footer className="border-t border-slate-700 bg-[#111111] text-slate-300">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold">T</span>
-              </div>
-              <span className="text-xl font-bold text-white">TechPro</span>
-            </div>
-            <p className="text-sm">
-              혁신적인 기술로 더 나은 미래를 만들어갑니다.
+            <p className="font-display mb-3 text-xl text-white">WETECH</p>
+            <p className="text-sm leading-relaxed text-slate-400">
+              Smart Bench를 중심으로 공공공간의 체감 품질을 높이는 도시형 솔루션을 제공합니다.
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h3 className="text-white font-semibold mb-4">바로가기</h3>
+            <h3 className="mb-3 text-sm font-semibold text-white">바로가기</h3>
             <ul className="space-y-2">
-              <li>
-                <Link to="/" className="text-sm hover:text-blue-400 transition-colors">
-                  홈
-                </Link>
-              </li>
-              <li>
-                <Link to="/products" className="text-sm hover:text-blue-400 transition-colors">
-                  제품
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="text-sm hover:text-blue-400 transition-colors">
-                  회사 소개
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-sm hover:text-blue-400 transition-colors">
-                  문의하기
-                </Link>
-              </li>
+              {quickLinks.map((item) => (
+                <li key={item.to}>
+                  <Link to={item.to} onClick={scrollToTop} className="text-sm text-slate-300 transition hover:text-white">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Contact Info */}
           <div>
-            <h3 className="text-white font-semibold mb-4">연락처</h3>
-            <ul className="space-y-2">
-              <li className="flex items-center space-x-2 text-sm">
-                <Phone size={16} />
-                <span>{siteConfig.contact.phone}</span>
+            <h3 className="mb-3 text-sm font-semibold text-white">연락처</h3>
+            <ul className="space-y-2 text-sm">
+              <li className="flex items-center gap-2">
+                <Phone size={15} className="text-slate-300" />
+                <a href={`tel:${siteConfig.contact.phone}`} className="hover:text-white">
+                  {siteConfig.contact.phone}
+                </a>
               </li>
-              <li className="flex items-center space-x-2 text-sm">
-                <Mail size={16} />
-                <span>{siteConfig.contact.email}</span>
+              <li className="flex items-center gap-2">
+                <Mail size={15} className="text-slate-300" />
+                <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-white">
+                  {siteConfig.contact.email}
+                </a>
               </li>
-              <li className="flex items-start space-x-2 text-sm">
-                <MapPin size={16} className="mt-0.5" />
+              <li className="flex items-start gap-2">
+                <MapPin size={15} className="mt-0.5 text-slate-300" />
                 <span>
                   {siteConfig.contact.address.line1}
                   <br />
@@ -69,29 +63,12 @@ export function Footer() {
               </li>
             </ul>
           </div>
-
-          {/* Social Links */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">소셜 미디어</h3>
-            <div className="flex space-x-4">
-              <a href="#" className="hover:text-blue-400 transition-colors" aria-label="Facebook">
-                <Facebook size={20} />
-              </a>
-              <a href="#" className="hover:text-blue-400 transition-colors" aria-label="Twitter">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="hover:text-blue-400 transition-colors" aria-label="Instagram">
-                <Instagram size={20} />
-              </a>
-              <a href="#" className="hover:text-blue-400 transition-colors" aria-label="LinkedIn">
-                <Linkedin size={20} />
-              </a>
-            </div>
-          </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm">
-          <p>&copy; 2026 TechPro. All rights reserved.</p>
+        <div className="mt-8 border-t border-white/10 pt-6 text-xs text-slate-500">
+          <p>
+            &copy; {new Date().getFullYear()} {siteConfig.company.name}. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

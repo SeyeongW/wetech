@@ -1,149 +1,81 @@
-import { ShoppingCart, Star } from "lucide-react";
+import { Snowflake, Flame, ShieldCheck, Wifi, Droplets, Leaf } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import brochureFeatures from "../../assets/smart-bench/brochure-features.png";
+
+const featureGuide = [
+  {
+    icon: <Snowflake className="h-4 w-4" />,
+    title: "결로 방지 기술",
+    summary: "실시간 환경값 감지 기반으로 결로 발생을 줄여 쾌적한 착석 환경을 유지합니다.",
+  },
+  {
+    icon: <Flame className="h-4 w-4" />,
+    title: "자동 온도 제어",
+    summary: "냉열/온열 모드를 외기 조건에 따라 자동 전환해 안정적인 체감 온도를 제공합니다.",
+  },
+  {
+    icon: <Droplets className="h-4 w-4" />,
+    title: "방수 설계",
+    summary: "실외 설치 환경을 고려한 구조로 우천 시에도 안정적인 운용이 가능합니다.",
+  },
+  {
+    icon: <Wifi className="h-4 w-4" />,
+    title: "무선 제어",
+    summary: "비접촉 설정 기반으로 운영관리와 유지보수 편의성을 높였습니다.",
+  },
+  {
+    icon: <ShieldCheck className="h-4 w-4" />,
+    title: "전기 안전 기능",
+    summary: "보호 회로 및 안전 기준 기반 설계로 공공시설 적용 리스크를 최소화합니다.",
+  },
+  {
+    icon: <Leaf className="h-4 w-4" />,
+    title: "친환경/저소음",
+    summary: "열 효율 중심 운용과 저소음 설계로 주변 공간에 미치는 부담을 줄입니다.",
+  },
+];
 
 export function Products() {
-  const products = [
-    {
-      id: 1,
-      name: "프리미엄 헤드폰",
-      category: "오디오",
-      price: "299,000원",
-      rating: 4.8,
-      reviews: 245,
-      image: "https://images.unsplash.com/photo-1723961617032-ef69c454cb31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcmVtaXVtJTIwaGVhZHBob25lc3xlbnwxfHx8fDE3NzIxMTI2OTF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      description: "탁월한 음질과 노이즈 캔슬링 기능",
-    },
-    {
-      id: 2,
-      name: "스마트워치 Pro",
-      category: "웨어러블",
-      price: "549,000원",
-      rating: 4.9,
-      reviews: 189,
-      image: "https://images.unsplash.com/photo-1719744755507-a4c856c57cf7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzbWFydHdhdGNoJTIwZGV2aWNlfGVufDF8fHx8MTc3MjExNjAzN3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      description: "건강 관리와 스마트 기능의 완벽한 조화",
-    },
-    {
-      id: 3,
-      name: "무선 이어버드",
-      category: "오디오",
-      price: "189,000원",
-      rating: 4.7,
-      reviews: 412,
-      image: "https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aXJlbGVzcyUyMGVhcmJ1ZHN8ZW58MXx8fHwxNzcyMDk0NzI5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      description: "편안한 착용감과 뛰어난 배터리 성능",
-    },
-    {
-      id: 4,
-      name: "울트라북 15",
-      category: "컴퓨터",
-      price: "1,890,000원",
-      rating: 4.9,
-      reviews: 156,
-      image: "https://images.unsplash.com/photo-1677157561132-4f9e282a1684?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsYXB0b3AlMjBjb21wdXRlciUyMG9mZmljZXxlbnwxfHx8fDE3NzIwMzkzMjN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      description: "강력한 성능과 슬림한 디자인",
-    },
-    {
-      id: 5,
-      name: "스마트폰 X1",
-      category: "모바일",
-      price: "1,290,000원",
-      rating: 4.8,
-      reviews: 523,
-      image: "https://images.unsplash.com/photo-1676173646307-d050e097d181?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzbWFydHBob25lJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NzIwOTIxNjF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      description: "혁신적인 카메라와 프로세서 탑재",
-    },
-    {
-      id: 6,
-      name: "태블릿 Air",
-      category: "모바일",
-      price: "890,000원",
-      rating: 4.7,
-      reviews: 298,
-      image: "https://images.unsplash.com/photo-1758979792186-32a5da91f24d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjB0ZWNobm9sb2d5JTIwcHJvZHVjdHxlbnwxfHx8fDE3NzIxMTYwMzZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      description: "대화면 디스플레이와 멀티태스킹",
-    },
-  ];
-
   return (
-    <div className="py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl mb-4 text-gray-900">
-            우리의 제품
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            혁신적인 기술과 세련된 디자인이 만나 완성된 프리미엄 제품들을 만나보세요.
+    <div className="bg-[#f4f4f5] px-4 py-12 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl space-y-8">
+        <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm lg:p-10">
+          <p className="font-display mb-3 text-sm tracking-[0.14em] text-slate-500">PRODUCT</p>
+          <h1 className="text-4xl sm:text-5xl">제품</h1>
+          <p className="mt-5 max-w-4xl leading-relaxed text-slate-600">
+            Smart Bench 제품 페이지는 설치 가능 분야보다 기능 중심으로 확인할 수 있도록 구성했습니다. 현장 적용 전 핵심
+            성능과 운영 방식을 먼저 검토할 수 있습니다.
           </p>
-        </div>
+        </section>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow"
-            >
-              <div className="relative aspect-square overflow-hidden bg-gray-100">
-                <ImageWithFallback
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm">
-                    {product.category}
-                  </span>
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl mb-2 text-gray-900">
-                  {product.name}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  {product.description}
-                </p>
-                <div className="flex items-center mb-4">
-                  <div className="flex items-center">
-                    <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                    <span className="ml-1 text-sm text-gray-700">
-                      {product.rating}
-                    </span>
-                  </div>
-                  <span className="ml-2 text-sm text-gray-500">
-                    ({product.reviews} 리뷰)
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl text-gray-900">
-                    {product.price}
-                  </span>
-                  <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                    <ShoppingCart className="w-4 h-4 mr-2" />
-                    구매
-                  </button>
-                </div>
-              </div>
+        <section className="grid grid-cols-1 gap-8 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm lg:grid-cols-2 lg:p-10">
+          <div className="group overflow-hidden rounded-2xl border border-slate-200">
+            <ImageWithFallback
+              src={brochureFeatures}
+              alt="Smart Bench 기능 소개 이미지"
+              className="h-[420px] w-full object-cover object-top transition duration-700 group-hover:scale-[1.02]"
+            />
+          </div>
+
+          <div>
+            <h2 className="text-3xl">핵심 기능 안내</h2>
+            <p className="mt-4 text-sm leading-relaxed text-slate-600">
+              Smart Bench는 냉·온열 제어, 결로 대응, 실외 안전 운용을 중심으로 설계되었습니다. 아래 항목은 실제 설치 현장에서
+              가장 많이 검토되는 기능들입니다.
+            </p>
+            <div className="mt-6 space-y-3">
+              {featureGuide.map((item) => (
+                <article key={item.title} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                  <p className="flex items-center gap-2 text-sm font-semibold text-slate-900">
+                    <span className="rounded-md bg-slate-900 p-1 text-slate-100">{item.icon}</span>
+                    {item.title}
+                  </p>
+                  <p className="mt-1 text-sm text-slate-600">{item.summary}</p>
+                </article>
+              ))}
             </div>
-          ))}
-        </div>
-
-        {/* Info Section */}
-        <div className="mt-16 bg-blue-50 rounded-lg p-8 text-center">
-          <h2 className="text-2xl mb-4 text-gray-900">
-            제품에 대해 궁금하신가요?
-          </h2>
-          <p className="text-gray-600 mb-6">
-            전문 상담사가 제품 선택을 도와드립니다.
-          </p>
-          <a
-            href="/contact"
-            className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            문의하기
-          </a>
-        </div>
+          </div>
+        </section>
       </div>
     </div>
   );

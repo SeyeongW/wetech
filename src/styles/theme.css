@@ -135,6 +135,11 @@
 
   html {
     font-size: var(--font-size);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Noto Sans KR", sans-serif;
   }
 
   h1 {
@@ -177,5 +182,90 @@
     font-size: var(--text-base);
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Oxanium", "Noto Sans KR", sans-serif;
+  }
+
+  .smart-gradient {
+    background:
+      radial-gradient(circle at 18% 22%, rgba(156, 156, 156, 0.16) 0%, transparent 36%),
+      radial-gradient(circle at 82% 84%, rgba(110, 110, 110, 0.12) 0%, transparent 42%),
+      linear-gradient(120deg, #0c0c0d 0%, #18181b 42%, #27272a 100%);
+  }
+
+  .smart-panel {
+    background: linear-gradient(155deg, rgba(255, 255, 255, 0.9), rgba(245, 248, 253, 0.78));
+    backdrop-filter: blur(6px);
+  }
+
+  .reveal-up {
+    animation: reveal-up 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .stagger-up {
+    animation: reveal-up 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .reveal-delay-1 {
+    animation-delay: 90ms;
+  }
+
+  .reveal-delay-2 {
+    animation-delay: 180ms;
+  }
+
+  .reveal-delay-3 {
+    animation-delay: 270ms;
+  }
+
+  .float-soft {
+    animation: float-soft 5.8s ease-in-out infinite;
+  }
+
+  .image-pan {
+    animation: image-pan 14s ease-in-out infinite alternate;
+  }
+
+  .catalog-grid {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 34px 34px;
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes float-soft {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  @keyframes image-pan {
+    0% {
+      transform: scale(1.04) translateX(-1.5%);
+    }
+    100% {
+      transform: scale(1.08) translateX(1.5%);
+    }
   }
 }
