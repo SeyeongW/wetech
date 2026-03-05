@@ -5,7 +5,6 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 import benchCity from "../../assets/smart-bench/bench-city.png";
 import heroBench from "../../assets/smart-bench/hero-bench.png";
 import usageFields from "../../assets/smart-bench/usage-fields.png";
-import brochureFeatures from "../../assets/smart-bench/brochure-features.png";
 
 const overviewCards = [
   {
@@ -56,8 +55,8 @@ export function Home() {
       <section className="spectral-hero" style={heroStyle}>
         <div className="spectral-inner">
           <p className="spectral-kicker text-xs text-white/75">WETECH PUBLIC SPACE SOLUTION</p>
-          <h1 className="spectral-title">WETECH</h1>
-          <p className="spectral-subtitle mx-auto mt-4 max-w-3xl text-sm sm:text-base">
+          <h1 className="spectral-title text-white">WETECH</h1>
+          <p className="spectral-subtitle text-white/90 mx-auto mt-4 max-w-3xl text-sm sm:text-base">
             도시 휴식 공간의 품질을 높이는 스마트 냉·온열 벤치 플랫폼
           </p>
 
@@ -71,7 +70,7 @@ export function Home() {
           </div>
 
           <div className="spectral-hero-product reveal-up">
-            <ImageWithFallback src={heroBench} alt="WETECH Smart Bench 정면 이미지" className="float-soft" />
+            <ImageWithFallback src={heroBench} alt="WETECH Smart Bench 정면 이미지" className="" />
           </div>
 
           <a href="#overview" className="spectral-hero-scroll">
@@ -105,70 +104,67 @@ export function Home() {
 
       <section className="spectral-section pt-0">
         <div className="spectral-wrapper style2">
-          <section className="spectral-spotlight">
-            <div className="image">
-              <ImageWithFallback
-                src={brochureFeatures}
-                alt="WETECH Smart Bench 기능 안내 이미지"
-                className="h-full w-full object-cover object-top"
-              />
-            </div>
-            <div className="content">
-              <h3>핵심 기능</h3>
-              <p>
-                열전 기반 냉·온열 제어, 결로 대응, 방수 설계, 무선 제어 기능을 중심으로 공공시설 운영에 필요한 기능을
-                제품 단위로 제공합니다.
-              </p>
+          <section className="bg-white border border-[#eaeaea] rounded-xl overflow-hidden shadow-sm">
+            <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+              <div className="lg:col-span-5 p-8 lg:p-12 bg-[#f4f6f8] flex flex-col items-center justify-center min-h-[300px]">
+                <ImageWithFallback
+                  src={heroBench}
+                  alt="WETECH Smart Bench 3D Render"
+                  className="w-full max-w-md lg:max-w-full h-auto object-contain transition-transform duration-700 hover:scale-[1.02]"
+                />
+              </div>
+              <div className="lg:col-span-7 p-8 lg:p-12 flex flex-col justify-center">
+                <h3 className="text-2xl font-bold tracking-tight text-[#1d242a] mb-5">핵심 기능</h3>
+                <p className="text-[#1d242a]/80 mb-8 leading-relaxed text-[0.95rem] break-keep">
+                  열전 기반 냉·온열 제어, 결로 대응, 방수 설계, 무선 제어 기능을 중심으로 공공시설 운영에 필요한 기능을 제품 단위로 제공합니다.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
+                  {featureCards.map((feature, idx) => (
+                    <div key={idx} className="flex gap-4">
+                      <div className="shrink-0 mt-1 p-2 bg-[#f4f6f8] rounded-full border border-[#eaeaea] text-[#0052cc] w-10 h-10 flex items-center justify-center">
+                        {feature.icon}
+                      </div>
+                      <div className="min-w-0">
+                        <h4 className="font-bold text-[0.95rem] text-[#1d242a] mb-1">{feature.title}</h4>
+                        <p className="text-sm text-[#1d242a]/70 leading-relaxed break-keep">{feature.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </section>
 
-          <section className="spectral-spotlight">
-            <div className="image">
-              <ImageWithFallback
-                src={usageFields}
-                alt="WETECH Smart Bench 활용 분야"
-                className="h-full w-full object-cover object-top"
-              />
-            </div>
-            <div className="content">
-              <h3>활용 분야</h3>
-              <p>
-                공원 및 정원, 대중교통 대기 구간, 관광지 및 공공시설, 장거리 보행 동선까지 현장 목적에 맞는 적용 시나리오를
-                제안합니다.
-              </p>
+          <section className="bg-white border border-[#eaeaea] rounded-xl overflow-hidden shadow-sm mt-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[400px]">
+              <div className="lg:col-span-5 p-0 bg-[#f4f6f8] flex flex-col items-center justify-center relative min-h-[300px] overflow-hidden">
+                <ImageWithFallback
+                  src={usageFields}
+                  alt="WETECH Smart Bench 활용 분야"
+                  className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
+                />
+              </div>
+              <div className="lg:col-span-7 p-8 lg:p-12 flex flex-col justify-center bg-white">
+                <h3 className="text-2xl font-bold tracking-tight text-[#1d242a] mb-5">활용 분야</h3>
+                <p className="text-[#1d242a]/80 leading-relaxed text-[0.95rem] break-keep max-w-xl">
+                  공원 및 정원, 대중교통 대기 구간, 관광지 및 공공시설, 장거리 보행 동선까지 현장 목적에 맞는 적용 시나리오를 제안합니다.
+                </p>
+              </div>
             </div>
           </section>
         </div>
       </section>
 
-      <section className="spectral-section pt-0">
-        <div className="spectral-wrapper style3">
-          <header className="spectral-major">
-            <h2>Core Functions</h2>
-            <p>도입 검토 시 우선 확인되는 주요 기능 항목입니다.</p>
-          </header>
-          <div className="spectral-feature-grid mt-6">
-            {featureCards.map((feature) => (
-              <article key={feature.title} className="spectral-feature-item">
-                <h4 className="flex items-center gap-2">
-                  {feature.icon}
-                  {feature.title}
-                </h4>
-                <p>{feature.description}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="spectral-section pt-0">
+
+      <section className="spectral-section pt-0 overflow-hidden">
         <div className="spectral-wrapper style4">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <header className="spectral-major">
-              <h2>Project Inquiry</h2>
-              <p>설치 예정 공간 정보와 운영 조건을 알려주시면 목적에 맞는 제품 구성을 제안드립니다.</p>
+              <h2 className="scroll-follow">Project Inquiry</h2>
+              <p className="scroll-follow scroll-delay-1">설치 예정 공간 정보와 운영 조건을 알려주시면 목적에 맞는 제품 구성을 제안드립니다.</p>
             </header>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 scroll-follow scroll-delay-2">
               <Link to="/products" className="spectral-btn">
                 제품 상세
               </Link>

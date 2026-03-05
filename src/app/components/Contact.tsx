@@ -44,7 +44,7 @@ export function Contact() {
       <section className="spectral-page-header" style={headerStyle}>
         <div className="spectral-inner">
           <p className="spectral-kicker text-xs text-white/75 scroll-follow">Contact WETECH</p>
-          <h1 className="spectral-title scroll-follow scroll-delay-1">문의</h1>
+          <h1 className="spectral-title text-white scroll-follow scroll-delay-1">문의</h1>
           <p className="spectral-subtitle mx-auto mt-4 max-w-3xl text-sm sm:text-base scroll-follow scroll-delay-2">
             프로젝트 목적과 요구사항을 남겨주시면 담당자가 검토 후 회신드립니다.
           </p>
