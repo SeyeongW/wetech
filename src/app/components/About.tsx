@@ -1,5 +1,6 @@
 ﻿import type { CSSProperties } from "react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { Flame, ShieldCheck, Snowflake } from "lucide-react";
 import benchCity from "../../assets/smart-bench/bench-city.png";
 import usageFields from "../../assets/smart-bench/usage-fields.png";
 import cert1 from "../../assets/smart-bench/certs/cert1.png";
@@ -7,6 +8,24 @@ import cert2 from "../../assets/smart-bench/certs/cert2.png";
 import cert3 from "../../assets/smart-bench/certs/cert3.png";
 import cert4 from "../../assets/smart-bench/certs/cert4.png";
 import cert5 from "../../assets/smart-bench/certs/cert5.png";
+
+const overviewCards = [
+  {
+    title: "공공공간 체감 온도 개선",
+    description: "계절과 시간대 변화에 맞춘 제어로 공간 이용 경험의 편차를 줄입니다.",
+    icon: <Snowflake className="h-4 w-4" />,
+  },
+  {
+    title: "냉·온열 자동 대응",
+    description: "외기 조건에 따라 운용 모드를 자동 전환해 운영 안정성을 확보합니다.",
+    icon: <Flame className="h-4 w-4" />,
+  },
+  {
+    title: "실외 설치 안전성",
+    description: "방수·안전 기준을 고려한 설계로 실외 공공시설 환경에 대응합니다.",
+    icon: <ShieldCheck className="h-4 w-4" />,
+  },
+];
 
 const useCases = [
   {
@@ -52,43 +71,96 @@ export function About() {
 
       <section className="spectral-section pt-12 pb-20">
         <div className="spectral-wrapper style1">
-          {/* About Smart Bench Section */}
-          <section className="mb-20">
-            <header className="mb-6 text-center">
-              <h2 className="text-[1.5rem] font-extrabold tracking-[0.1em] text-[#1d242a] relative inline-block">
-                About Smart Bench
-                <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[#0052cc]"></span>
+          {/* Section 0: WETECH 소개 (Moved from Home) */}
+          <section className="mb-24">
+            <div className="text-center mb-16 lg:mb-20">
+              <h2 className="text-[2.2rem] md:text-[2.5rem] font-extrabold tracking-tight text-[#1d242a] mb-5 relative inline-block">
+                스마트 벤치 소개
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-16 h-1.5 bg-[#0052cc] rounded-full"></div>
               </h2>
-            </header>
-            <div className="bg-[#f8f9fa] rounded-2xl p-8 lg:p-12 border border-[#eaeaea] text-center shadow-sm">
-              <p className="text-[1.05rem] leading-relaxed text-[#1d242a]/80 break-keep max-w-4xl mx-auto">
-                국내외 유일의 특허 기술인 직류 기반 세라믹 열전소자를 적용하여 냉각과 가열을 동시에 수행하며, 뛰어난 효율과 내구성을 제공합니다. 이 기술은 기상 변화에 따라 벤치 스스로 온도 조절을 하여 온열 및 냉각 기능을 제공하며, 센서를 통해 사용자가 없을 때는 설정된 기본 온도만 유지해 불필요한 에너지 소비를 최소화합니다.
+              <p className="text-[#1d242a]/70 text-[1.1rem] md:text-[1.2rem] max-w-3xl mx-auto leading-relaxed break-keep mt-8">
+                WETECH Smart Bench는 공원, 보행 동선, 대중교통 대기 공간에서 이용자 체류 품질을 개선하기 위한 공공공간 특화 제품입니다.
               </p>
             </div>
-          </section>
-          {/* Section 1: How it is used */}
-          <section className="bg-white border border-[#eaeaea] rounded-xl overflow-hidden shadow-sm mb-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
-              <div className="lg:col-span-5 p-0 bg-[#f4f6f8] flex flex-col items-center justify-center relative min-h-[300px]">
-                <ImageWithFallback src={usageFields} alt="WETECH Smart Bench 활용 분야" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]" />
-              </div>
-              <div className="lg:col-span-7 p-8 lg:p-12 flex flex-col justify-center bg-white">
-                <h2 className="text-2xl font-bold tracking-tight text-[#1d242a] mb-5">어떻게 활용되나요?</h2>
-                <p className="text-[#1d242a]/80 mb-10 leading-relaxed text-[0.95rem] break-keep max-w-2xl">
-                  공간 목적, 체류 시간, 운영 시간대에 따라 도입 목적이 달라집니다. WETECH는 현장 여건을 기반으로 우선 적용
-                  분야를 설정할 수 있도록 활용 시나리오를 제공합니다.
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
-                  {useCases.map((item) => (
-                    <div key={item.title} className="flex gap-4">
-                      <div className="shrink-0 mt-1.5 w-2 h-2 rounded-full bg-[#0052cc]"></div>
-                      <div className="min-w-0">
-                        <h4 className="font-bold text-[0.95rem] text-[#1d242a] mb-2">{item.title}</h4>
-                        <p className="text-sm text-[#1d242a]/70 leading-relaxed break-keep">{item.description}</p>
-                      </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+              {overviewCards.map((card) => (
+                <article key={card.title} className="group relative bg-white border border-[#eaeaea] hover:border-[#0052cc]/30 rounded-3xl p-8 lg:p-10 hover:shadow-[0_12px_40px_rgb(0,0,0,0.06)] hover:-translate-y-2 transition-all duration-500 overflow-hidden flex flex-col h-full min-h-[300px]">
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-[#0052cc]/5 to-transparent rounded-bl-full -z-10 group-hover:scale-150 transition-transform duration-700"></div>
+                  <div className="mb-8">
+                    <div className="w-16 h-16 rounded-2xl bg-[#f4f6f8] flex items-center justify-center text-[#0052cc] group-hover:bg-[#0052cc] group-hover:text-white transition-all duration-500 shadow-sm border border-[#eaeaea] group-hover:border-transparent mb-6">
+                      {card.icon}
                     </div>
-                  ))}
+                    <h4 className="text-[1.35rem] font-bold text-[#1d242a] group-hover:text-[#0052cc] transition-colors duration-300">
+                      {card.title}
+                    </h4>
+                  </div>
+                  <p className="text-[#1d242a]/70 leading-relaxed text-[1.05rem] break-keep font-medium mt-auto">
+                    {card.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          {/* Section 1: How it is used */}
+          <section className="mb-24">
+            <div className="text-center mb-12 lg:mb-16">
+              <h2 className="text-[2rem] font-extrabold tracking-tight text-[#1d242a] mb-5 relative inline-block">
+                어떻게 활용되나요?
+                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[#0052cc] rounded-full"></div>
+              </h2>
+              <p className="text-[#1d242a]/70 text-[1.05rem] max-w-2xl mx-auto leading-relaxed break-keep mt-6">
+                공간 목적, 체류 시간, 운영 시간대에 따라 도입 목적이 달라집니다.<br className="hidden sm:block" />
+                WETECH는 현장 여건을 기반으로 최적의 활용 시나리오를 제안합니다.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              {/* Image Showcase Card */}
+              <div className="lg:col-span-5 relative rounded-3xl overflow-hidden min-h-[350px] lg:min-h-[100%] group shadow-sm border border-[#eaeaea]">
+                <ImageWithFallback
+                  src={usageFields}
+                  alt="WETECH Smart Bench 활용 분야"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1d242a]/90 via-[#1d242a]/20 to-transparent"></div>
+                <div className="absolute bottom-8 left-8 right-8">
+                  <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-5 border border-white/20">
+                    <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-white text-2xl font-bold mb-3 tracking-tight">다양한 공간 연출</h3>
+                  <p className="text-white/80 text-[0.95rem] font-light leading-relaxed break-keep">
+                    단순한 휴식 공간을 넘어, 스마트한 기술로 지속 가능한 도시 환경을 조성합니다.
+                  </p>
                 </div>
+              </div>
+
+              {/* Feature Cards Grid */}
+              <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                {useCases.map((item, index) => (
+                  <div
+                    key={item.title}
+                    className="group relative bg-white border border-[#eaeaea] hover:border-[#0052cc]/30 rounded-3xl p-6 sm:p-8 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-400 overflow-hidden cursor-default flex flex-col justify-between h-full min-h-[220px]"
+                  >
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#0052cc]/5 to-transparent rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-700"></div>
+                    <div>
+                      <div className="flex items-center justify-between mb-6">
+                        <span className="text-4xl font-extrabold text-[#1d242a]/5 group-hover:text-[#0052cc]/10 transition-colors duration-500">
+                          0{index + 1}
+                        </span>
+                      </div>
+                      <h4 className="text-xl font-bold text-[#1d242a] mb-3 group-hover:text-[#0052cc] transition-colors duration-300">
+                        {item.title}
+                      </h4>
+                    </div>
+                    <p className="text-[#1d242a]/70 leading-relaxed text-[0.95rem] break-keep font-medium">
+                      {item.description}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </section>

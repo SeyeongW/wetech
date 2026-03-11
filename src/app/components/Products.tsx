@@ -125,63 +125,75 @@ export function Products() {
             </div>
           ) : (
             <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
+              {/* Product Specifications Section */}
+              <section className="bg-white border border-[#eaeaea] rounded-[2rem] overflow-hidden shadow-sm mb-24">
+                <div className="grid lg:grid-cols-[45%_55%] items-stretch">
+                  <div className="relative p-8 lg:p-12 min-h-[400px] bg-[#f4f6f8] flex items-center justify-center group overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#0052cc]/5 to-transparent z-0"></div>
+                    <ImageWithFallback
+                      src={bench4Image}
+                      alt="WETECH Smart Bench 기술 구성 이미지"
+                      className="relative z-10 w-full h-full object-contain mix-blend-multiply transition-transform duration-1000 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="flex flex-col justify-center p-8 lg:p-16 bg-white border-l border-[#eaeaea]">
+                    <h2 className="text-[2rem] font-extrabold tracking-tight text-[#1d242a] mb-6 relative inline-block self-start">
+                      제품 사양
+                      <span className="absolute -bottom-2 left-0 w-12 h-1 bg-[#0052cc] rounded-full"></span>
+                    </h2>
+                    <p className="mt-2 text-[1.05rem] leading-relaxed text-[#1d242a]/80 break-keep mb-8">
+                      WETECH Smart Bench는 냉·온열 제어, 결로 대응, 실외 안전 운용을 중심으로 설계된 공공공간용 차세대 설비입니다. 현장의 운영 정책(시간/온도/환경)에 따라 맞춤형 운전 모드를 구성할 수 있습니다.
+                    </p>
 
-              <section className="grid gap-12 lg:grid-cols-[45%_55%] items-center mb-24">
-                <div className="rounded-2xl border border-[#eaeaea] bg-white p-6 lg:p-10 shadow-sm relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent pointer-events-none"></div>
-                  <ImageWithFallback
-                    src={bench4Image}
-                    alt="WETECH Smart Bench 기술 구성 이미지"
-                    className="h-full min-h-[300px] w-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <div className="flex flex-col justify-center">
-                  <h2 className="text-[1.35rem] font-extrabold tracking-[0.1em] text-[#1d242a] mb-6 relative inline-block">
-                    제품 기능 전문 사양
-                    <span className="absolute -bottom-2 left-0 w-8 h-1 bg-[#0052cc]"></span>
-                  </h2>
-                  <p className="mt-2 text-[1rem] leading-relaxed text-[#1d242a]/80 break-keep">
-                    WETECH Smart Bench는 냉·온열 제어, 결로 대응, 실외 안전 운용을 중심으로 설계된 공공공간용 차세대 설비입니다.
-                    설치 현장의 운영 정책(시간/온도/환경)에 따라 맞춤형 운전 모드를 구성할 수 있습니다.
-                  </p>
-                  <p className="mt-4 text-[0.95rem] leading-relaxed text-[#1d242a]/60 break-keep">
-                    현장 적용 시에는 공간 유형, 이용 밀도, 유지보수 접근성, 전원 인프라 조건을 종합적으로 검토해 최적의 기능 우선순위를
-                    설정하는 것을 권장합니다.
-                  </p>
-
-                  <div className="mt-8 bg-white rounded-xl p-6 border border-[#eaeaea] shadow-[0_2px_10px_rgb(0,0,0,0.02)]">
-                    <dl className="space-y-4">
-                      {technicalSpecs.map((spec) => (
-                        <div key={spec.key} className="flex flex-col sm:flex-row sm:items-baseline pb-4 border-b border-[#f0f0f0] last:border-0 last:pb-0">
-                          <dt className="w-36 shrink-0 font-bold text-[0.9rem] tracking-[0.05em] text-[#1d242a] uppercase">{spec.key}</dt>
-                          <dd className="mt-1 sm:mt-0 text-[0.9rem] text-[#1d242a]/70 leading-relaxed break-keep">{spec.value}</dd>
-                        </div>
-                      ))}
-                    </dl>
+                    <div className="bg-[#f8f9fa] rounded-2xl p-6 md:p-8 border border-[#eaeaea]">
+                      <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                        {technicalSpecs.map((spec) => (
+                          <div key={spec.key} className="flex flex-col pb-4 border-b border-[#eaeaea] md:border-b-0 md:pb-0">
+                            <dt className="text-sm font-bold text-[#0052cc] uppercase tracking-wider mb-2">{spec.key}</dt>
+                            <dd className="text-[0.95rem] font-medium text-[#1d242a] leading-relaxed break-keep">{spec.value}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    </div>
                   </div>
                 </div>
               </section>
 
-              <header className="mb-12 text-center pt-12 border-t border-[#eaeaea]">
-                <h2 className="text-[1.35rem] font-extrabold tracking-[0.1em] text-[#1d242a] mb-4">주요 기술 요소 상세안내</h2>
-                <p className="text-[#1d242a]/60">도입 시 필수적으로 검토되는 10가지 핵심 기술입니다.</p>
-              </header>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
-                {featureGuide.map((item) => (
-                  <article
+              {/* 10 Key Features Bento Box */}
+              <div className="text-center mb-12 lg:mb-16">
+                <h2 className="text-[2rem] font-extrabold tracking-tight text-[#1d242a] mb-5 relative inline-block">
+                  주요 기술 가이드
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[#0052cc] rounded-full"></div>
+                </h2>
+                <p className="text-[#1d242a]/70 text-[1.05rem] max-w-2xl mx-auto leading-relaxed break-keep mt-6">
+                  도입 시 필수적으로 검토되는 10가지 핵심 기술을 안내합니다.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 pb-20">
+                {featureGuide.map((item, index) => (
+                  <div
                     key={item.title}
-                    className="flex flex-col border border-[#eaeaea] bg-white rounded-2xl p-8 shadow-[0_2px_10px_rgb(0,0,0,0.02)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 group"
+                    className="group relative bg-white border border-[#eaeaea] hover:border-[#0052cc]/30 rounded-3xl p-6 sm:p-8 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-400 overflow-hidden cursor-default flex flex-col justify-between min-h-[240px]"
                   >
-                    <div className="flex items-center gap-4 mb-5">
-                      <span className="flex items-center justify-center shrink-0 w-12 h-12 rounded-xl bg-[#f4f6f8] text-[#0052cc] border border-[#eaeaea] group-hover:bg-[#0052cc] group-hover:text-white transition-colors duration-300">
-                        {item.icon}
-                      </span>
-                      <h4 className="font-bold text-[1.1rem] tracking-[0.02em] text-[#1d242a]">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#0052cc]/5 to-transparent rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-700"></div>
+                    <div>
+                      <div className="flex items-center justify-between mb-6">
+                        <span className="text-4xl font-extrabold text-[#1d242a]/5 group-hover:text-[#0052cc]/10 transition-colors duration-500">
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                        <div className="w-12 h-12 rounded-2xl bg-[#f8f9fa] flex items-center justify-center text-[#1d242a]/60 group-hover:bg-[#0052cc] group-hover:text-white transition-all duration-300 shadow-sm border border-[#eaeaea] group-hover:border-transparent">
+                          {item.icon}
+                        </div>
+                      </div>
+                      <h4 className="text-[1.15rem] font-bold text-[#1d242a] mb-3 group-hover:text-[#0052cc] transition-colors duration-300">
                         {item.title}
                       </h4>
                     </div>
-                    <p className="text-[0.95rem] leading-relaxed text-[#1d242a]/70 flex-grow break-keep">{item.summary}</p>
-                  </article>
+                    <p className="text-[#1d242a]/70 leading-relaxed text-[0.95rem] break-keep font-medium">
+                      {item.summary}
+                    </p>
+                  </div>
                 ))}
               </div>
             </div>
