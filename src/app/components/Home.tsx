@@ -1,4 +1,4 @@
-﻿import type { CSSProperties } from "react";
+import type { CSSProperties } from "react";
 import { Link } from "react-router";
 import { Cpu, Droplets, Snowflake, Wifi } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
@@ -9,7 +9,7 @@ import usageFields from "../../assets/smart-bench/usage-fields.png";
 
 const featureCards = [
   {
-    title: "무선 제어",
+    title: "IoT 기반 무선 제어",
     description: "비접촉 설정 기반으로 운영 관리와 점검 편의성을 높입니다.",
     icon: <Wifi className="h-4 w-4" />,
   },
