@@ -1,4 +1,4 @@
-﻿import type { CSSProperties } from "react";
+import type { CSSProperties } from "react";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
 import { siteConfig } from "../siteConfig";
@@ -30,11 +30,25 @@ export function Contact() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const encode = (data: Record<string, string>) => {
+    return Object.keys(data)
+      .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 2500);
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "contact", ...formData }),
+    })
+      .then(() => {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", phone: "", message: "" });
+        setTimeout(() => setSubmitted(false), 3500);
+      })
+      .catch((error) => console.error("Form transmission failed:", error));
   };
 
   const headerStyle = { "--page-image": "none" } as CSSProperties;
@@ -95,7 +109,8 @@ export function Contact() {
                 <h2>문의하기</h2>
                 <p>담당자가 확인 가능한 연락처와 요청사항을 남겨주세요.</p>
               </header>
-              <form onSubmit={handleSubmit} className="spectral-form-grid mt-5">
+              <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit} className="spectral-form-grid mt-5">
+                <input type="hidden" name="form-name" value="contact" />
                 <div className="spectral-field scroll-follow">
                   <label htmlFor="name">이름</label>
                   <input id="name" name="name" value={formData.name} onChange={handleChange} required />

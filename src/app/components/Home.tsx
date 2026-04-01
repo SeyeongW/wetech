@@ -1,10 +1,11 @@
 import type { CSSProperties } from "react";
 import { Link } from "react-router";
+import { motion } from "motion/react";
 import { Cpu, Droplets, Snowflake, Wifi } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { ScrollStorytelling } from "./ScrollStorytelling";
 import benchCity from "../../assets/smart-bench/bench-city.png";
-import heroBench from "../../assets/smart-bench/hero-bench.png";
+import heroBench from "../../assets/smart-bench/bench4.png";
 import usageFields from "../../assets/smart-bench/usage-fields.png";
 
 const featureCards = [
@@ -37,41 +38,63 @@ export function Home() {
     <div className="spectral-page">
       {/* Apple-style Hero Section - Dark Mode */}
       <section className="relative w-full min-h-screen bg-black overflow-hidden flex flex-col items-center pt-32 pb-16">
-        {/* Typographic Header */}
-        <div className="relative z-20 text-center flex flex-col items-center px-4 w-full max-w-7xl mx-auto">
-          <p className="text-[#f5f5f7] font-semibold text-xl md:text-2xl mb-2 tracking-wide">
+        {/* Cinematic Typographic Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 1.4, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-20 text-center flex flex-col items-center px-4 w-full max-w-7xl mx-auto"
+        >
+          <p className="text-[#f5f5f7] font-semibold text-xl md:text-2xl mb-2 tracking-[0.25em] uppercase opacity-80">
             스마트 공공시설 솔루션
           </p>
-          <h1 className="text-[4rem] sm:text-[6rem] md:text-[8rem] lg:text-[10rem] font-black tracking-tighter leading-none mb-6 text-transparent bg-clip-text bg-gradient-to-b from-white via-neutral-300 to-neutral-600 drop-shadow-2xl">
+          <h1 className="text-[5rem] sm:text-[7rem] md:text-[9rem] lg:text-[11rem] font-black tracking-tighter leading-none mb-6 text-transparent bg-clip-text bg-gradient-to-b from-white via-neutral-300 to-neutral-800 drop-shadow-xl">
             WETECH
           </h1>
           <p className="text-[#86868b] text-lg md:text-2xl font-medium tracking-tight max-w-2xl mx-auto mb-16">
-            도시 거리에 새로운 휴식의 기준을 제시합니다.
+            도시 공간에 빛과 온기를 불어넣는 새로운 휴식의 척도.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 z-30 mb-12">
-            <Link to="/contact" className="bg-[#0071e3] text-white hover:bg-[#0077ed] px-8 py-3.5 rounded-full font-bold text-lg tracking-wide transition-all duration-300 shadow-lg">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="flex flex-col sm:flex-row items-center gap-4 z-30 mb-12"
+          >
+            <Link to="/contact" className="bg-[#f5f5f7] text-black hover:bg-white px-8 py-3.5 rounded-full font-bold text-lg tracking-wide transition-all duration-300 shadow-lg shadow-white/20">
               도입 문의
             </Link>
-            <Link to="/about" className="text-[#2997ff] hover:text-[#50a8ff] hover:underline underline-offset-4 px-6 py-3 font-medium text-lg tracking-wide transition-colors">
+            <Link to="/about" className="text-[#f5f5f7] hover:text-white hover:underline underline-offset-4 px-6 py-3 font-medium text-lg tracking-wide transition-colors">
               더 알아보기 {'>'}
             </Link>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        {/* Hero Product Image with Spotlight Effect to hide white background */}
-        <div className="relative z-10 w-full max-w-[120rem] mx-auto mt-auto flex justify-center px-4 sm:px-12 origin-bottom animate-in fade-in slide-in-from-bottom-24 duration-1000 ease-out">
-          {/* Spotlight behind the image */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] max-w-[800px] h-[80%] rounded-[100%] bg-[radial-gradient(circle,rgba(255,255,255,1)_0%,rgba(255,255,255,0.8)_20%,rgba(0,0,0,0)_70%)] blur-2xl pointer-events-none -z-10"></div>
+        {/* Cinematic Hero Product Reveal */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 1.1, y: 60 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 2, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="relative z-10 w-full max-w-[120rem] mx-auto mt-auto flex justify-center px-4 sm:px-12 origin-bottom"
+        >
+          {/* Glowing Spotlight expanding from behind */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.4 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 3.5, delay: 0.8, ease: "easeOut" }}
+            className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] max-w-[900px] h-[75%] rounded-[100%] blur-[80px] pointer-events-none -z-10"
+            style={{ background: "radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(180,210,255,0.25) 25%, rgba(0,0,0,0) 70%)" }}
+          ></motion.div>
 
           <ImageWithFallback
             src={heroBench}
-            alt="WETECH Smart Bench"
-            className="w-full h-auto object-contain max-h-[60vh] mix-blend-multiply drop-shadow-2xl"
+            alt="WETECH Smart Bench Cinematic Reveal"
+            className="w-full h-auto object-contain max-h-[65vh] drop-shadow-2xl"
           />
-          {/* Bottom Fade Gradient for blending into next section */}
-          <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black to-transparent"></div>
-        </div>
+          
+          {/* Bottom Fade Gradient for blending seamlessly */}
+          <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+        </motion.div>
       </section>
 
       {/* Scrollytelling Section */}
