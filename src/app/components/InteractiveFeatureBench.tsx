@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import type { LucideIcon } from "lucide-react";
 import { Cpu, Droplets, Flame, Leaf, ShieldCheck, Snowflake, Wifi } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
@@ -13,46 +14,46 @@ type Feature = {
 
 const features: Feature[] = [
   {
-    id: "condensation",
-    icon: Snowflake,
-    title: "결로 방지 기술",
-    summary: "표면 온도와 외기 환경을 분석해 결로가 생기기 쉬운 구간을 안정적으로 제어합니다.",
-  },
-  {
     id: "temp",
     icon: Flame,
     title: "자동 온도 제어",
-    summary: "냉·온열 운전 조건을 실시간으로 조정해 계절과 시간대에 맞는 체감 온도를 제공합니다.",
+    summary: "냉·온열 운전 조건을 실시간 조정하여 최적의 체감 온도를 항시 유지합니다.",
   },
   {
     id: "waterproof",
     icon: Droplets,
-    title: "방수 설계",
-    summary: "실외 설치 환경을 고려한 구조와 마감으로 빗물, 물튀김, 습기에 대한 내구성을 높였습니다.",
+    title: "방수/방진 설계",
+    summary: "실외 비와 눈, 습기에도 견디도록 완벽한 구조적 방형 설계를 적용했습니다.",
+  },
+  {
+    id: "condensation",
+    icon: Snowflake,
+    title: "결로 대응 시스템",
+    summary: "표면 온도와 대기 습도를 분석해 착석 라인에 결로가 발생하지 않도록 제어합니다.",
   },
   {
     id: "wireless",
     icon: Wifi,
-    title: "IoT 기반 무선 제어",
-    summary: "현장 접근 없이도 운전 상태를 확인하고 주요 설정을 원격으로 조정할 수 있습니다.",
-  },
-  {
-    id: "safety",
-    icon: ShieldCheck,
-    title: "전기 안전 기능",
-    summary: "보호 회로와 안전 설계를 통해 공공장소에서도 안정적으로 운용할 수 있도록 구성했습니다.",
+    title: "IoT 무선 제어",
+    summary: "관리 시스템을 통해 현장에 가지 않고도 온도와 조명을 원격으로 즉시 조정합니다.",
   },
   {
     id: "eco",
     icon: Leaf,
-    title: "친환경 저소음 설계",
-    summary: "에너지 소비를 줄이고 소음을 낮춰 장시간 사용 환경에서도 쾌적함을 유지합니다.",
+    title: "저소음 고효율",
+    summary: "자체 개발된 에너지 최적화 알고리즘으로 전력 소모와 팬 소음을 최소화합니다.",
+  },
+  {
+    id: "safety",
+    icon: ShieldCheck,
+    title: "전기 및 구조 안전",
+    summary: "다중 안전 보호 회로와 고강성 소재를 적용해 공공장소에서도 철저히 보호됩니다.",
   },
   {
     id: "optimization",
     icon: Cpu,
     title: "운영 최적화",
-    summary: "운영 시간과 계절 조건에 따라 장비 동작을 세밀하게 맞춰 관리 효율을 높입니다.",
+    summary: "이용 패턴을 학습하여 스스로 운전 효율을 극대화하는 메인 브레인 모듈.",
   },
 ];
 
@@ -60,20 +61,26 @@ export function InteractiveFeatureBench() {
   const [activeFeatureId, setActiveFeatureId] = useState<string | null>(null);
 
   return (
-    <div className="relative flex w-full flex-col items-center justify-center gap-12 p-4 lg:flex-row lg:p-12">
-      <div className="flex w-full justify-center lg:w-2/3">
-        <div className="relative isolate w-full max-w-4xl overflow-hidden bg-transparent px-4 py-6 transition-all duration-700 sm:px-8 sm:py-10">
-          <ImageWithFallback
-            src={bench1Img}
-            alt="WETECH Smart Bench Interactive Features"
-            className={`relative z-20 h-auto w-full object-contain transition-all duration-700 ${
-              activeFeatureId ? "scale-[1.015] drop-shadow-[0_24px_36px_rgba(0,0,0,0.15)]" : "scale-100"
-            }`}
-          />
-        </div>
+    <div className="relative w-full max-w-[100rem] mx-auto min-h-[600px] flex flex-col items-center justify-center p-4 lg:p-12 overflow-hidden">
+      
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-[100%] blur-[120px] pointer-events-none -z-10" style={{ background: "radial-gradient(ellipse, rgba(0,82,204,0.08) 0%, rgba(200,220,250,0.1) 40%, rgba(0,0,0,0) 70%)" }}></div>
+
+      {/* Main Bench Display */}
+      <div className="relative w-full max-w-4xl h-[350px] sm:h-[450px] lg:h-[550px] flex items-center justify-center mb-16 isolate">
+        
+        {/* Core Bench Image always remains original */}
+        <ImageWithFallback
+          src={bench1Img}
+          alt="WETECH Smart Bench Interactive View"
+          className="relative z-10 w-full h-full object-contain drop-shadow-xl mix-blend-multiply transition-transform duration-700 ease-out"
+          style={{ transform: activeFeatureId ? "scale(1.02)" : "scale(1)" }}
+        />
+        
       </div>
 
-      <div className="relative flex w-full flex-col gap-4 lg:w-1/3">
+      {/* Neatly Aligned Dock of Feature Icons */}
+      <div className="relative flex flex-wrap justify-center gap-4 sm:gap-6 z-20">
         {features.map((feature) => {
           const FeatureIcon = feature.icon;
           const isActive = activeFeatureId === feature.id;
@@ -82,42 +89,48 @@ export function InteractiveFeatureBench() {
           return (
             <div
               key={feature.id}
-              className="group relative flex cursor-pointer items-center lg:w-max"
+              className="relative group"
               onMouseEnter={() => setActiveFeatureId(feature.id)}
               onMouseLeave={() => setActiveFeatureId(null)}
             >
+              {/* Tooltip Popup */}
+              <AnimatePresence>
+                {isActive && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, y: -16, scale: 1, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95, filter: "blur(4px)" }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="absolute bottom-full left-1/2 -translate-x-1/2 w-max max-w-[240px] sm:max-w-[280px] p-5 rounded-2xl bg-white/90 backdrop-blur-xl border border-[#eaeaea] shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-30 pointer-events-none"
+                  >
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-[#0052cc]/10 text-[#0052cc]">
+                        <FeatureIcon className="h-4 w-4" />
+                      </span>
+                      <h4 className="text-[1rem] font-extrabold text-[#1d242a] tracking-tight leading-none whitespace-nowrap">{feature.title}</h4>
+                    </div>
+                    <p className="break-keep text-[0.88rem] leading-relaxed text-[#1d242a]/70 m-0 font-medium">{feature.summary}</p>
+                    
+                    {/* Tooltip downward arrow */}
+                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 border-b border-r border-[#eaeaea] bg-white/90 backdrop-blur-xl"></div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* Neatly Aligned Icon Button */}
               <div
-                className={`z-20 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[#eaeaea] shadow-sm transition-all duration-300 ease-out ${
+                className={`relative flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-full backdrop-blur-md transition-all duration-300 ease-out shadow-sm cursor-pointer border ${
                   isActive
-                    ? "scale-110 border-[#0052cc] bg-[#0052cc] text-white shadow-lg ring-4 ring-[#0052cc]/20"
-                    : "bg-white text-[#1d242a] group-hover:bg-[#f4f6f8] group-hover:text-[#0052cc]"
-                } ${isDimmed ? "scale-95 opacity-40" : "opacity-100"}`}
+                    ? "bg-[#0052cc] text-white border-transparent scale-110 shadow-md"
+                    : "bg-white text-[#1d242a] border-[#eaeaea] hover:bg-[#0052cc] hover:text-white hover:border-transparent hover:shadow-md"
+                } ${isDimmed ? "opacity-30 scale-95" : "opacity-100"}`}
               >
-                <FeatureIcon className="h-5 w-5" />
-              </div>
-
-              <div
-                className={`ml-4 text-[1rem] font-bold transition-all duration-300 ${
-                  isActive ? "text-[#0052cc]" : "text-[#1d242a]"
-                } ${isDimmed ? "opacity-40" : "opacity-100"}`}
-              >
-                {feature.title}
-              </div>
-
-              <div
-                className={`pointer-events-none absolute left-0 top-full z-30 mt-2 w-[280px] origin-top rounded-2xl border border-[#eaeaea]/80 bg-white/90 p-5 shadow-[0_8px_30px_rgb(0,0,0,0.08)] backdrop-blur-xl transition-all duration-300 lg:left-[calc(100%+0.75rem)] lg:top-1/2 lg:mt-0 lg:-translate-y-1/2 lg:origin-left ${
-                  isActive ? "visible translate-x-0 scale-100 opacity-100" : "invisible -translate-x-4 scale-95 opacity-0"
-                }`}
-              >
-                <div className="mb-2 flex items-center gap-2">
-                  <span className="shrink-0 rounded-lg bg-[#0052cc]/10 p-1.5 text-[#0052cc]">
-                    <FeatureIcon className="h-4 w-4" />
-                  </span>
-                  <h4 className="text-[0.95rem] font-bold text-[#1d242a]">{feature.title}</h4>
+                {/* Static Icon */}
+                <div className="flex items-center justify-center transform-gpu">
+                  <FeatureIcon className="h-6 w-6 sm:h-7 sm:w-7" />
                 </div>
-                <p className="break-keep text-[0.9rem] leading-relaxed text-[#1d242a]/80">{feature.summary}</p>
-                <div className="absolute -left-2 top-1/2 hidden h-4 w-4 -translate-y-1/2 rotate-45 border-b border-l border-[#eaeaea]/80 bg-white/90 backdrop-blur-xl lg:block" />
               </div>
+
             </div>
           );
         })}

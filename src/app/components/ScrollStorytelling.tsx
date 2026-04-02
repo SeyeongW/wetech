@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
+import heroBench from "../../assets/smart-bench/bench4.png";
 
 const PLAYHOLDER_VIDEO = "https://cdn.pixabay.com/video/2020/05/13/38992-421731674_large.mp4"; // Nature/Park like video
 
@@ -27,8 +28,11 @@ export function ScrollStorytelling() {
     const y3 = useTransform(scrollYProgress, [0.55, 0.65, 0.75, 0.85], [50, 0, 0, -50]);
 
     // 섹션 4: 솔루션 설명
-    const op4 = useTransform(scrollYProgress, [0.85, 0.9, 0.95, 1], [0, 1, 1, 0]);
-    const y4 = useTransform(scrollYProgress, [0.85, 0.9, 0.95, 1], [50, 0, 0, -50]);
+    const op4 = useTransform(scrollYProgress, [0.80, 0.85, 0.99, 1], [0, 1, 1, 0.9]);
+    const y4 = useTransform(scrollYProgress, [0.80, 0.85, 1], [50, 0, 0]);
+    const benchY = useTransform(scrollYProgress, [0.80, 0.92, 1], [150, 0, 0]);
+    const benchBlur = useTransform(scrollYProgress, [0.80, 0.88, 1], ["blur(15px)", "blur(0px)", "blur(0px)"]);
+    const benchOp = useTransform(scrollYProgress, [0.80, 0.88, 1], [0, 1, 1]);
 
     // 비디오 화면 확대 효과 (마지막에 몰입감 증대)
     const videoScale = useTransform(scrollYProgress, [0.7, 1], [1, 1.15]);
@@ -50,7 +54,7 @@ export function ScrollStorytelling() {
     };
 
     return (
-        <div ref={containerRef} className="relative w-full bg-black h-[400vh]">
+        <div ref={containerRef} className="relative w-full bg-black h-[500vh]">
             <div className="sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center">
 
                 {/* 스크롤 연동 비디오 배경 */}
@@ -127,34 +131,46 @@ export function ScrollStorytelling() {
                     {/* Scene 4 */}
                     <motion.div
                         style={{ opacity: op4, y: y4 }}
-                        className="absolute text-center max-w-4xl flex flex-col items-center"
+                        className="absolute inset-0 w-full h-[100vh] flex flex-col items-center justify-start pt-[12vh] md:pt-[18vh] px-4 max-w-[120rem] mx-auto z-20 text-center"
                     >
-                        <h2 className="text-4xl md:text-6xl font-extrabold text-white mb-10 tracking-tight">
+                        <h2 className="text-3xl md:text-5xl lg:text-[4rem] font-bold text-white mb-8 md:mb-12 tracking-tight drop-shadow-xl z-30">
                             새로운 기준을 제시합니다
                         </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
-                            <div className="bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-2xl flex flex-col items-center">
-                                <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mb-5">
-                                    <span className="text-2xl">❄️</span>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 w-full max-w-5xl mx-auto z-30">
+                            <div className="group bg-white/10 backdrop-blur-md border border-white/20 p-6 md:p-8 rounded-2xl flex flex-col items-center transition-all duration-300 hover:bg-white/20">
+                                <div className="w-12 h-12 md:w-16 md:h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 md:mb-6 text-white transition-all duration-500 group-hover:bg-[#3b82f6]">
+                                    <span className="material-symbols-outlined text-[28px] md:text-[36px]">thermostat</span>
                                 </div>
-                                <h3 className="text-white text-xl font-bold mb-3">직류 세라믹 열전소자</h3>
-                                <p className="text-white/70 text-sm break-keep">단일 모듈로 가열과 냉각을 동시에 수행하는 독자적인 특허 기술</p>
+                                <h3 className="text-white text-lg md:text-xl font-bold mb-2 md:mb-3 transition-colors">직류 세라믹 열전소자</h3>
+                                <p className="text-white/70 text-xs md:text-sm break-keep">단일 모듈로 가열과 냉각을 동시에 수행하는 독자적인 특허 기술</p>
                             </div>
-                            <div className="bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-2xl flex flex-col items-center">
-                                <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mb-5">
-                                    <span className="text-2xl">⚡</span>
+                            <div className="group bg-white/10 backdrop-blur-md border border-white/20 p-6 md:p-8 rounded-2xl flex flex-col items-center transition-all duration-300 hover:bg-white/20">
+                                <div className="w-12 h-12 md:w-16 md:h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 md:mb-6 text-white transition-all duration-500 group-hover:bg-[#3b82f6]">
+                                    <span className="material-symbols-outlined text-[28px] md:text-[36px]">energy_savings_leaf</span>
                                 </div>
-                                <h3 className="text-white text-xl font-bold mb-3">스마트 에너지 절감</h3>
-                                <p className="text-white/70 text-sm break-keep">센서를 통해 이용자를 감지하고 최적의 대기/작동 전력 분배</p>
+                                <h3 className="text-white text-lg md:text-xl font-bold mb-2 md:mb-3 transition-colors">스마트 에너지 절감</h3>
+                                <p className="text-white/70 text-xs md:text-sm break-keep">센서를 통해 이용자를 감지하고 최적의 대기/작동 전력 분배</p>
                             </div>
-                            <div className="bg-white/10 backdrop-blur-lg border border-white/20 p-8 rounded-2xl flex flex-col items-center">
-                                <div className="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mb-5">
-                                    <span className="text-2xl">🛡️</span>
+                            <div className="group bg-white/10 backdrop-blur-md border border-white/20 p-6 md:p-8 rounded-2xl flex flex-col items-center transition-all duration-300 hover:bg-white/20">
+                                <div className="w-12 h-12 md:w-16 md:h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 md:mb-6 text-white transition-all duration-500 group-hover:bg-[#3b82f6]">
+                                    <span className="material-symbols-outlined text-[28px] md:text-[36px]">shield_lock</span>
                                 </div>
-                                <h3 className="text-white text-xl font-bold mb-3">강력한 내구성</h3>
-                                <p className="text-white/70 text-sm break-keep">비바람과 외부 충격에 견디는 IP방수방진 및 견고한 특수 마감</p>
+                                <h3 className="text-white text-lg md:text-xl font-bold mb-2 md:mb-3 transition-colors">강력한 내구성</h3>
+                                <p className="text-white/70 text-xs md:text-sm break-keep">비바람과 외부 충격에 견디는 IP방수방진 및 견고한 특수 마감</p>
                             </div>
                         </div>
+                        
+                        {/* Hero Bench Ascending from Void */}
+                        <motion.div 
+                            style={{ y: benchY, opacity: benchOp, filter: benchBlur }}
+                            className="absolute bottom-0 w-full flex justify-center z-10 translate-y-[20%] md:translate-y-[10%]"
+                        >
+                            <img 
+                                src={heroBench} 
+                                alt="WETECH Smart Bench Focus" 
+                                className="w-full max-w-[1400px] h-auto object-contain mix-blend-screen drop-shadow-2xl opacity-90"
+                            />
+                        </motion.div>
                     </motion.div>
 
                 </div>
