@@ -1,139 +1,162 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import type { LucideIcon } from "lucide-react";
-import { Cpu, Droplets, Flame, Leaf, ShieldCheck, Snowflake, Wifi } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import bench1Img from "../../assets/smart-bench/bench1.png";
 
 type Feature = {
   id: string;
-  icon: LucideIcon;
   title: string;
   summary: string;
+  color: string;
 };
 
 const features: Feature[] = [
   {
     id: "temp",
-    icon: Flame,
-    title: "자동 온도 제어",
-    summary: "냉·온열 운전 조건을 실시간 조정하여 최적의 체감 온도를 항시 유지합니다.",
-  },
-  {
-    id: "waterproof",
-    icon: Droplets,
-    title: "방수/방진 설계",
-    summary: "실외 비와 눈, 습기에도 견디도록 완벽한 구조적 방형 설계를 적용했습니다.",
+    title: "친환경 무냉매 온열 제어",
+    summary: "냉매를 사용하지 않는 친환경 열전 모듈로 유해물질 걱정 없는 균일한 안락함을 전달합니다.",
+    color: "#ff453a",
   },
   {
     id: "condensation",
-    icon: Snowflake,
-    title: "결로 대응 시스템",
-    summary: "표면 온도와 대기 습도를 분석해 착석 라인에 결로가 발생하지 않도록 제어합니다.",
+    title: "능동형 고효율 결로 방지",
+    summary: "환경 데이터를 정밀하게 분석하여 온도와 습도를 제어, 착석부의 쾌적함을 최상으로 유지합니다.",
+    color: "#ff9f0a",
+  },
+  {
+    id: "waterproof",
+    title: "구조적 방수·방진 설계",
+    summary: "외부 환경의 영향으로부터 자유로운 IP 등급의 강력한 보호 설계가 적용되었습니다.",
+    color: "#bf5af2",
   },
   {
     id: "wireless",
-    icon: Wifi,
-    title: "IoT 무선 제어",
-    summary: "관리 시스템을 통해 현장에 가지 않고도 온도와 조명을 원격으로 즉시 조정합니다.",
+    title: "IoT 지능형 원격 제어",
+    summary: "IoT 메인 인프라를 통해 물리적 방문 없이도 실시간 모니터링 및 기기 상태를 정밀 제어하는 차세대 원격 관리 시스템입니다.",
+    color: "#0071e3",
   },
   {
     id: "eco",
-    icon: Leaf,
-    title: "저소음 고효율",
-    summary: "자체 개발된 에너지 최적화 알고리즘으로 전력 소모와 팬 소음을 최소화합니다.",
+    title: "현장 최적화 절전 시스템",
+    summary: "필요한 순간에만 작동하는 지능형 절전 알고리즘으로 불필요한 에너지 소모를 획기적으로 줄입니다.",
+    color: "#32d74b",
   },
   {
     id: "safety",
-    icon: ShieldCheck,
-    title: "전기 및 구조 안전",
-    summary: "다중 안전 보호 회로와 고강성 소재를 적용해 공공장소에서도 철저히 보호됩니다.",
+    title: "통합 다중 안전 시스템",
+    summary: "KC 안전 인증과 다중 보호 회로를 통해 공공장소에서의 예상치 못한 사고를 철저히 방지합니다.",
+    color: "#64d2ff",
   },
   {
-    id: "optimization",
-    icon: Cpu,
-    title: "운영 최적화",
-    summary: "이용 패턴을 학습하여 스스로 운전 효율을 극대화하는 메인 브레인 모듈.",
+    id: "custom",
+    title: "상상을 현실로, 전천후 커스텀",
+    summary: "당신이 상상하는 그 어떤 환경과 조건이라도 WETECH은 마침내 해답을 찾아냅니다. 공간의 한계를 넘어선 맞춤형 솔루션을 제안합니다.",
+    color: "#ff2d55",
   },
 ];
 
 export function InteractiveFeatureBench() {
-  const [activeFeatureId, setActiveFeatureId] = useState<string | null>(null);
+  const [activeFeatureId, setActiveFeatureId] = useState<string>(features[0].id);
+  
+  const activeFeature = features.find(f => f.id === activeFeatureId) || features[0];
 
   return (
-    <div className="relative w-full max-w-[100rem] mx-auto min-h-[600px] flex flex-col items-center justify-center p-4 lg:p-12 overflow-hidden">
+    <div className="relative w-full max-w-[90rem] mx-auto min-h-[700px] flex flex-col items-center justify-center p-6 lg:p-16">
       
-      {/* Background ambient lighting — adjusted for pure black */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-[100%] blur-[120px] pointer-events-none -z-10" style={{ background: "radial-gradient(ellipse, rgba(0,113,227,0.12) 0%, rgba(0,113,227,0.05) 40%, rgba(0,0,0,0) 70%)" }}></div>
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-5xl max-h-5xl rounded-full blur-[160px] pointer-events-none -z-10 opacity-30" style={{ background: `radial-gradient(circle, ${activeFeature.color}15 0%, transparent 70%)` }}></div>
 
-      {/* Main Bench Display */}
-      <div className="relative w-full max-w-4xl h-[350px] sm:h-[450px] lg:h-[550px] flex items-center justify-center mb-16 isolate">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 w-full items-center">
         
-        {/* Core Bench Image always remains original */}
-        <ImageWithFallback
-          src={bench1Img}
-          alt="WETECH Smart Bench Interactive View"
-          className="relative z-10 w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.05)] transition-transform duration-700 ease-out"
-          style={{ transform: activeFeatureId ? "scale(1.02)" : "scale(1)" }}
-        />
-        
-      </div>
+        {/* Left: Product Visualization (Static position for less distraction) */}
+        <div className="relative flex items-center justify-center min-h-[400px] lg:min-h-[500px]">
+          <div className="relative w-full h-full flex items-center justify-center">
+            {/* Subtle glow reacting to selection */}
+            <motion.div 
+              key={activeFeatureId}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.1 }}
+              className="absolute inset-0 rounded-full blur-3xl pointer-events-none"
+              style={{ background: activeFeature.color }}
+            />
+            
+            <ImageWithFallback
+              src={bench1Img}
+              alt="WETECH Smart Bench Focus"
+              className="relative z-10 w-full max-w-3xl h-auto object-contain drop-shadow-[0_20px_60px_rgba(0,0,0,0.8)]"
+            />
 
-      {/* Neatly Aligned Dock of Feature Icons */}
-      <div className="relative flex flex-wrap justify-center gap-4 sm:gap-6 z-20">
-        {features.map((feature) => {
-          const FeatureIcon = feature.icon;
-          const isActive = activeFeatureId === feature.id;
-          const isDimmed = activeFeatureId !== null && !isActive;
-
-          return (
-            <div
-              key={feature.id}
-              className="relative group"
-              onMouseEnter={() => setActiveFeatureId(feature.id)}
-              onMouseLeave={() => setActiveFeatureId(null)}
-            >
-              {/* Tooltip Popup */}
-              <AnimatePresence>
-                {isActive && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.95, filter: "blur(4px)" }}
-                    animate={{ opacity: 1, y: -16, scale: 1, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, y: 10, scale: 0.95, filter: "blur(4px)" }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                    className="absolute bottom-full left-1/2 -translate-x-1/2 w-max max-w-[240px] sm:max-w-[280px] p-5 rounded-2xl bg-white/90 backdrop-blur-xl border border-[#eaeaea] shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-30 pointer-events-none"
-                  >
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className="shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-[#0071e3]/10 text-[#0071e3]">
-                        <FeatureIcon className="h-4 w-4" />
-                      </span>
-                      <h4 className="text-[1rem] font-extrabold text-[#1d1d1f] tracking-tight leading-none whitespace-nowrap">{feature.title}</h4>
-                    </div>
-                    <p className="break-keep text-[0.88rem] leading-relaxed text-[#1d1d1f]/80 m-0 font-medium">{feature.summary}</p>
-                    
-                    {/* Tooltip downward arrow */}
-                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 border-b border-r border-[#eaeaea] bg-white/95 backdrop-blur-xl"></div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* Neatly Aligned Icon Button */}
-              <div
-                className={`relative flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-full backdrop-blur-md transition-all duration-300 ease-out shadow-sm cursor-pointer border ${
-                  isActive
-                    ? "bg-[#0071e3] text-white border-transparent scale-110 shadow-lg shadow-[#0071e3]/20"
-                    : "bg-white/5 text-[#98989d] border-white/10 hover:bg-white/10 hover:text-[#f5f5f7] hover:border-white/20 shadow-none"
-                } ${isDimmed ? "opacity-30 scale-95" : "opacity-100"}`}
-              >
-                {/* Static Icon */}
-                <div className="flex items-center justify-center transform-gpu">
-                  <FeatureIcon className="h-6 w-6 sm:h-7 sm:w-7" />
-                </div>
+            {/* Simple indicator */}
+            <div className="absolute top-0 right-0 flex flex-col items-end gap-2 pr-4 lg:pr-0">
+              <div className="flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10">
+                <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: activeFeature.color }} />
+                <span className="text-white text-[10px] font-bold tracking-widest uppercase opacity-70">Focus: {activeFeature.id.toUpperCase()}</span>
               </div>
-
             </div>
-          );
-        })}
+          </div>
+        </div>
+
+        {/* Right: Technical Details Showcase */}
+        <div className="flex flex-col gap-6">
+          <div className="mb-8 space-y-4">
+            <span className="text-[#0071e3] text-sm font-black tracking-[0.3em] uppercase">Technical Excellence</span>
+            <h2 className="text-white text-4xl lg:text-5xl font-black tracking-tight leading-tight">
+                스마트 기술의 <br />압도적 차이
+            </h2>
+          </div>
+
+          <div className="space-y-4">
+            {features.map((feature) => {
+              const isActive = activeFeatureId === feature.id;
+
+              return (
+                <motion.div
+                  key={feature.id}
+                  onClick={() => setActiveFeatureId(feature.id)}
+                  className={`relative group cursor-pointer p-6 rounded-3xl border transition-all duration-500 overflow-hidden ${
+                    isActive 
+                      ? "bg-white/10 shadow-2xl" 
+                      : "bg-transparent border-white/5 hover:border-white/15"
+                  }`}
+                  style={{ 
+                    borderColor: isActive ? `${feature.color}40` : undefined,
+                  }}
+                  whileHover={{ x: 10 }}
+                >
+                  <div className="relative z-10 flex flex-col gap-2">
+                    <div className="flex items-center gap-3">
+                      <h4 className={`text-xl font-bold transition-colors ${isActive ? "text-white" : "text-white/40 group-hover:text-white/70"}`}>
+                        {feature.title}
+                      </h4>
+                    </div>
+                    <AnimatePresence>
+                      {isActive && (
+                        <motion.p
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          className="text-white/60 text-sm leading-relaxed break-keep font-medium pt-1"
+                        >
+                          {feature.summary}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  
+                  {/* Active indicator line with unique color */}
+                  {isActive && (
+                    <motion.div 
+                      layoutId="activeIndicator"
+                      className="absolute left-0 top-0 w-1 h-full" 
+                      style={{ backgroundColor: feature.color }}
+                    />
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+
       </div>
     </div>
   );

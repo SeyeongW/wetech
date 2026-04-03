@@ -1,23 +1,15 @@
-import type { CSSProperties } from "react";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
 import { siteConfig } from "../siteConfig";
 
 const inquiryScopes = [
-  "도입/구축 문의",
-  "기술 제휴 및 협업 문의",
-  "유지보수 및 운영 지원 문의",
-  "공공 프로젝트 제안 문의",
+  "도입 및 구축 제안",
+  "기술 제휴 및 협업",
+  "유지보수 및 운영 지원",
+  "공공 프로젝트 협력",
 ];
 
-const processSteps = [
-  "문의 접수: 요구사항 및 일정 확인",
-  "초기 검토: 적용 가능 범위/제약 검토",
-  "회신 및 협의: 상세 범위, 일정, 비용 논의",
-  "진행 확정: 담당자 배정 및 실행 계획 안내",
-];
-
-export function Contact() {
+export function Contact({ isStandalone = false }: { isStandalone?: boolean }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -46,135 +38,157 @@ export function Contact() {
       .then(() => {
         setSubmitted(true);
         setFormData({ name: "", email: "", phone: "", message: "" });
-        setTimeout(() => setSubmitted(false), 3500);
+        setTimeout(() => setSubmitted(false), 5000);
       })
       .catch((error) => console.error("Form transmission failed:", error));
   };
 
-  const headerStyle = { "--page-image": "none" } as CSSProperties;
-
   return (
-    <div className="spectral-page">
-      <section className="spectral-page-header" style={headerStyle}>
-        <div className="spectral-inner">
-          <p className="spectral-kicker text-xs text-white/75 scroll-follow">Contact WETECH</p>
-          <h1 className="spectral-title text-white scroll-follow scroll-delay-1">문의</h1>
-          <p className="spectral-subtitle mx-auto mt-4 max-w-3xl text-sm sm:text-base scroll-follow scroll-delay-2">
-            프로젝트 목적과 요구사항을 남겨주시면 담당자가 검토 후 회신드립니다.
+    <div className={`w-full max-w-7xl mx-auto ${isStandalone ? 'pt-32 pb-24 px-6' : ''}`}>
+      
+      {/* Header (Only for standalone page) */}
+      {isStandalone && (
+        <div className="text-center mb-20 space-y-4">
+          <span className="text-[#0071e3] text-sm font-black tracking-[0.3em] uppercase">Contact Us</span>
+          <h1 className="text-zinc-900 text-5xl md:text-7xl font-black tracking-tight">문의하기</h1>
+          <p className="text-zinc-500 text-lg max-w-2xl mx-auto">
+            프로젝트 도입 상담 및 기술 지원을 위해 필요한 세부 내용을 남겨주세요.
           </p>
         </div>
-      </section>
+      )}
 
-      <section className="spectral-section pt-0">
-        <div className="spectral-wrapper style5 scroll-follow">
-          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-            <div className="scroll-follow">
-              <header className="spectral-major">
-                <h2>문의 범위</h2>
-                <p>아래 항목 기준으로 접수되며, 상세 내용은 문의 메시지에 함께 남겨주세요.</p>
-              </header>
-              <dl className="spectral-tech-list">
-                {inquiryScopes.map((scope, index) => (
-                  <div key={scope} className={`spectral-tech-row scroll-follow scroll-delay-${Math.min(index, 3)}`}>
-                    <dt>{`Scope 0${index + 1}`}</dt>
-                    <dd>{scope}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-
-            <div className="scroll-follow scroll-delay-1">
-              <header className="spectral-major">
-                <h2>처리 절차</h2>
-                <p>접수 이후 기본 진행 흐름입니다.</p>
-              </header>
-              <dl className="spectral-tech-list">
-                {processSteps.map((step, index) => (
-                  <div key={step} className={`spectral-tech-row scroll-follow scroll-delay-${Math.min(index, 3)}`}>
-                    <dt>{`Step 0${index + 1}`}</dt>
-                    <dd>{step}</dd>
-                  </div>
-                ))}
-              </dl>
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
+        
+        {/* Left: Contact Info & Scopes */}
+        <div className="lg:col-span-2 space-y-12">
+          <div className="space-y-8">
+            <h2 className="text-2xl font-black text-zinc-900">문의 안내</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+              {inquiryScopes.map((scope, idx) => (
+                <div key={idx} className="flex items-center gap-4 p-5 rounded-2xl bg-white border border-[#eaeaea] text-zinc-600 hover:border-[#0071e3]/30 hover:shadow-lg hover:shadow-[#0071e3]/5 transition-all">
+                  <div className="w-8 h-8 rounded-full bg-[#0071e3]/10 flex items-center justify-center text-[#0071e3] text-xs font-bold">{idx + 1}</div>
+                  <span className="font-semibold break-keep text-zinc-800">{scope}</span>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
 
-      <section className="spectral-section pt-0">
-        <div className="spectral-wrapper style5 scroll-follow">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <div className="scroll-follow">
-              <header className="spectral-major">
-                <h2>문의하기</h2>
-                <p>담당자가 확인 가능한 연락처와 요청사항을 남겨주세요.</p>
-              </header>
-              <form name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit} className="spectral-form-grid mt-5">
-                <input type="hidden" name="form-name" value="contact" />
-                <div className="spectral-field scroll-follow">
-                  <label htmlFor="name">이름</label>
-                  <input id="name" name="name" value={formData.name} onChange={handleChange} required />
+          <div className="space-y-6 pt-6 border-t border-[#eaeaea]">
+            <h3 className="text-lg font-bold text-[#0071e3] uppercase tracking-widest opacity-60">Connect Directly</h3>
+            <ul className="space-y-4 text-zinc-800">
+              <li className="flex items-center gap-4 group cursor-pointer hover:text-[#0071e3] transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-[#0071e3]/5 flex items-center justify-center group-hover:bg-[#0071e3]/10 transition-colors">
+                  <Phone className="w-5 h-5 text-[#0071e3]" />
                 </div>
-
-                <div className="spectral-field scroll-follow scroll-delay-1">
-                  <label htmlFor="email">이메일</label>
-                  <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required />
+                <span className="text-lg font-bold">{siteConfig.contact.phone}</span>
+              </li>
+              <li className="flex items-center gap-4 group cursor-pointer hover:text-[#0071e3] transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-[#0071e3]/5 flex items-center justify-center group-hover:bg-[#0071e3]/10 transition-colors">
+                  <Mail className="w-5 h-5 text-[#0071e3]" />
                 </div>
-
-                <div className="spectral-field scroll-follow scroll-delay-2">
-                  <label htmlFor="phone">연락처</label>
-                  <input id="phone" name="phone" value={formData.phone} onChange={handleChange} />
+                <span className="text-lg font-bold">{siteConfig.contact.email}</span>
+              </li>
+              <li className="flex items-start gap-4 group">
+                <div className="w-12 h-12 rounded-xl bg-[#0071e3]/5 flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5 text-[#0071e3]" />
                 </div>
-
-                <div className="spectral-field scroll-follow scroll-delay-3">
-                  <label htmlFor="message">문의 내용</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                  />
+                <div className="text-sm font-medium leading-relaxed text-zinc-500">
+                  {siteConfig.contact.address.line1} <br />
+                  {siteConfig.contact.address.line2}
                 </div>
-
-                <div className="flex items-center gap-3 scroll-follow scroll-delay-3">
-                  <button type="submit" className="spectral-btn dark">
-                    <Send className="mr-2 h-4 w-4" />
-                    문의 전송
-                  </button>
-                  {submitted && <p className="text-sm text-[#2e3842]/70">문의가 접수되었습니다.</p>}
-                </div>
-              </form>
-            </div>
-
-            <div className="scroll-follow scroll-delay-1">
-              <header className="spectral-major">
-                <h2>연락처 정보</h2>
-                <p>아래 채널로도 직접 문의하실 수 있습니다.</p>
-              </header>
-              <ul className="spectral-contact-info mt-5 text-sm text-[#2e3842]">
-                <li className="flex items-center gap-2">
-                  <Phone className="h-4 w-4" />
-                  {siteConfig.contact.phone}
-                </li>
-                <li className="flex items-center gap-2">
-                  <Mail className="h-4 w-4" />
-                  {siteConfig.contact.email}
-                </li>
-                <li className="flex items-start gap-2">
-                  <MapPin className="mt-0.5 h-4 w-4" />
-                  <span>
-                    {siteConfig.contact.address.line1}
-                    <br />
-                    {siteConfig.contact.address.line2}
-                  </span>
-                </li>
-              </ul>
-            </div>
+              </li>
+            </ul>
           </div>
         </div>
-      </section>
+
+        {/* Right: Modern Form Container */}
+        <div className="lg:col-span-3">
+          <form 
+            name="contact" 
+            method="POST" 
+            data-netlify="true" 
+            onSubmit={handleSubmit} 
+            className="relative p-8 md:p-12 rounded-[2.5rem] bg-white border border-[#eaeaea] shadow-2xl shadow-zinc-200/50 space-y-8 overflow-hidden"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            
+            {/* Background ambient light - softer for light theme */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#0071e3]/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="space-y-3">
+                <label htmlFor="name" className="text-xs font-black uppercase tracking-widest text-[#0071e3] ml-1">이름 / 기업명</label>
+                <input 
+                  id="name" 
+                  name="name" 
+                  value={formData.name} 
+                  onChange={handleChange} 
+                  required 
+                  className="w-full bg-[#f8f9fa] border border-[#f0f0f0] rounded-2xl px-5 py-4 text-zinc-900 focus:outline-none focus:border-[#0071e3] focus:bg-white transition-all placeholder:text-zinc-400"
+                  placeholder="홍길동"
+                />
+              </div>
+              <div className="space-y-3">
+                <label htmlFor="email" className="text-xs font-black uppercase tracking-widest text-[#0071e3] ml-1">이메일 주소</label>
+                <input 
+                  id="email" 
+                  name="email" 
+                  type="email" 
+                  value={formData.email} 
+                  onChange={handleChange} 
+                  required 
+                  className="w-full bg-[#f8f9fa] border border-[#f0f0f0] rounded-2xl px-5 py-4 text-zinc-900 focus:outline-none focus:border-[#0071e3] focus:bg-white transition-all placeholder:text-zinc-400"
+                  placeholder="contact@example.com"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <label htmlFor="phone" className="text-xs font-black uppercase tracking-widest text-[#0071e3] ml-1">연락처</label>
+              <input 
+                id="phone" 
+                name="phone" 
+                value={formData.phone} 
+                onChange={handleChange} 
+                className="w-full bg-[#f8f9fa] border border-[#f0f0f0] rounded-2xl px-5 py-4 text-zinc-900 focus:outline-none focus:border-[#0071e3] focus:bg-white transition-all placeholder:text-zinc-400"
+                placeholder="010-1234-5678"
+              />
+            </div>
+
+            <div className="space-y-3">
+              <label htmlFor="message" className="text-xs font-black uppercase tracking-widest text-[#0071e3] ml-1">문의 내용</label>
+              <textarea 
+                id="message" 
+                name="message" 
+                rows={6} 
+                value={formData.message} 
+                onChange={handleChange} 
+                required 
+                className="w-full bg-[#f8f9fa] border border-[#f0f0f0] rounded-3xl px-5 py-4 text-zinc-900 focus:outline-none focus:border-[#0071e3] focus:bg-white transition-all resize-none placeholder:text-zinc-400"
+                placeholder="구축하고자 하는 프로젝트의 상세 범위를 입력해 주세요."
+              />
+            </div>
+
+            <div className="flex flex-col items-center gap-6 pt-4">
+              <button 
+                type="submit" 
+                className="w-full sm:w-auto min-w-[240px] flex items-center justify-center gap-3 px-10 py-5 rounded-full bg-[#0071e3] text-white font-black hover:bg-[#0077ed] hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-[#0071e3]/40"
+              >
+                <Send className="w-5 h-5" />
+                <span>데이터 전송 및 상담 요청</span>
+              </button>
+              
+              {submitted && (
+                <div className="animate-reveal-up text-[#28a745] font-black flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-[#28a745] animate-pulse"></div>
+                  문의가 접수되었습니다. 담당자가 곧 회신해 드리겠습니다.
+                </div>
+              )}
+            </div>
+          </form>
+        </div>
+
+      </div>
     </div>
   );
 }

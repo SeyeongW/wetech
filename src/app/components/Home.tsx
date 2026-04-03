@@ -22,29 +22,6 @@ import cert5 from "../../assets/smart-bench/certs/cert5.png";
 import { InteractiveFeatureBench } from "./InteractiveFeatureBench";
 import { Contact } from "./Contact";
 
-const featureCards = [
-  {
-    title: "열전 기반 온도 제어",
-    description: "주변 기온을 분석해 자동으로 냉·온열 모드를 전환하며 사용자에게 최적의 쾌적함을 일정하게 제공합니다.",
-    icon: <Flame className="h-6 w-6" />,
-  },
-  {
-    title: "구조적 내구성과 방수형 설계",
-    description: "우천, 폭설 등 거친 실외 환경에서도 항상 안정적인 운영이 가능하도록 강력한 방수·방진 설계를 적용했습니다.",
-    icon: <Droplets className="h-6 w-6" />,
-  },
-  {
-    title: "스마트 결로 대응 시스템",
-    description: "정밀한 대기 환경값 감지를 통해 결로 현상 발생을 사전에 차단하여 착석부의 품질을 항상 유지합니다.",
-    icon: <Snowflake className="h-6 w-6" />,
-  },
-  {
-    title: "고효율 운용",
-    description: "사용 패턴과 외기 조건을 실시간으로 반영하여 불필요한 전력 소모를 차단하고 에너지 운용 효율을 극대화합니다.",
-    icon: <Cpu className="h-6 w-6" />,
-  },
-];
-
 const featureGuide = [
   { icon: <Snowflake className="h-5 w-5" />, title: "결로 방지 기술", summary: "환경 실시간 감지로 결로 방지" },
   { icon: <Leaf className="h-5 w-5" />, title: "에너지 절감", summary: "모션센서 기반 전력 최적화" },
@@ -83,12 +60,16 @@ const certificates = [
 
 export function Home() {
   const heroStyle = { "--hero-image": `url(${benchCity})` } as CSSProperties;
-  
-  // Scrollytelling Horizontal Section Ref & Hooks
+
+  // Horizontal Scroll Setup (Infinite Possibilities)
   const horizontalRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: horizontalRef });
   const scrollPct = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const xOffset = useTransform(scrollPct, (val) => `calc(${val}% + ${-val}vw)`);
+
+  const scrollToContact = () => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div className="spectral-page bg-black">
@@ -100,14 +81,14 @@ export function Home() {
             backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
           }}
         />
-        
-        {/* Refined Ambient Lighting: Replacing side glows with a subtle top-down spotlight */}
+
+        {/* Refined Ambient Lighting */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.4 }}
             transition={{ duration: 3 }}
-            className="absolute left-1/2 top-[-20%] h-[1000px] w-[1400px] -translate-x-1/2 rounded-full bg-gradient-to-b from-[#0071e3]/20 via-transparent to-transparent blur-[200px]" 
+            className="absolute left-1/2 top-[-20%] h-[1000px] w-[1400px] -translate-x-1/2 rounded-full bg-gradient-to-b from-[#0071e3]/20 via-transparent to-transparent blur-[200px]"
           />
           <div className="absolute left-1/2 top-[-5%] h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-white opacity-[0.02] blur-[150px]" />
         </div>
@@ -131,17 +112,22 @@ export function Home() {
             WETECH
           </h1>
 
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 1.2 }}
-            className="mb-14 text-lg sm:text-2xl text-[#98989d] font-light tracking-wide max-w-lg mx-auto leading-relaxed"
+            className="mb-14 text-lg sm:text-2xl text-[#98989d] font-light tracking-wide max-w-2xl mx-auto leading-relaxed"
           >
-            스마트 휴식의 <span className="text-[#f5f5f7] font-medium">새로운 기준</span>을 제시합니다.
+            공공의 휴식을 <span className="text-[#f5f5f7] font-medium italic underline decoration-[#0071e3] underline-offset-8">새로운 차원의 안락함</span>으로 제공하는, 압도적인 지능형 기술의 정수.<br />당신이 머무는 모든 공간이 가장 완벽한 순간으로 변화합니다.
           </motion.p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/contact" className="rounded-full bg-[#0071e3] px-10 py-4 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#0077ed] hover:scale-105 active:scale-95">도입 문의</Link>
+            <button 
+              onClick={scrollToContact}
+              className="rounded-full bg-[#0071e3] px-10 py-4 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#0077ed] hover:scale-105 active:scale-95 shadow-[#0071e3]/30"
+            >
+              도입 문의
+            </button>
             <Link to="/products" className="rounded-full border border-white/15 px-10 py-4 text-sm font-medium text-[#f5f5f7] transition-all duration-300 hover:border-white/30 hover:bg-white/5 active:scale-95">제품 살펴보기 →</Link>
           </div>
         </motion.div>
@@ -165,44 +151,55 @@ export function Home() {
         <ScrollStorytelling />
       </div>
 
-      {/* 3. Core Features Bento Grid */}
-      <section className="bg-[radial-gradient(circle_at_center,_#0a0a0a_0%,_#000_100%)] py-32 border-t border-white/5">
-        <div className="max-w-[78rem] mx-auto px-6">
-          <div className="mb-20 text-center">
-            <h2 className="text-[2.5rem] md:text-[3.5rem] font-black text-white tracking-tighter uppercase mb-6">Core Technology</h2>
-            <p className="text-[#98989d] text-lg font-medium max-w-2xl mx-auto break-keep">열전 제어, 결로 대응 등 공공시설 운영에 최적화된 첨단 기능을 제공합니다.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-            {featureCards.map((feature, idx) => (
-              <div key={idx} className="relative rounded-[2.5rem] p-10 overflow-hidden group border border-white/10 bg-[#111] transition-all duration-500 hover:border-[#0071e3]/40">
-                <div className="w-14 h-14 rounded-2xl bg-white/5 text-[#0071e3] flex items-center justify-center mb-8 border border-white/10 group-hover:bg-[#0071e3] group-hover:text-white transition-all duration-500">
-                  {feature.icon}
-                </div>
-                <h4 className="text-[#f5f5f7] text-[1.6rem] font-bold tracking-tight mb-4">{feature.title}</h4>
-                <p className="text-[#86868b] text-[1.1rem] leading-relaxed font-medium break-keep">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Interactive Feature Bench */}
+      {/* 3. Core Feature Explore (Interactive Bench) */}
       <section className="bg-[radial-gradient(circle_at_center,_#080808_0%,_#000_100%)] py-24 border-y border-white/5 overflow-hidden">
-        <div className="max-w-[78rem] mx-auto px-4 mb-16 text-center">
+        <div className="max-w-[78rem] mx-auto px-4 mb-24 text-center">
           <h2 className="text-[1.35rem] font-extrabold tracking-[0.1em] text-[#f5f5f7] mb-4 uppercase">WETECH 핵심 기술 탐색</h2>
-          <p className="text-[#98989d] text-[1.1rem] max-w-2xl mx-auto">스마트 벤치에 적용된 혁신적인 기술들을 인터랙티브 모듈로 확인해 보세요.</p>
+          <p className="text-[#98989d] text-[1.1rem] max-w-2xl mx-auto break-keep">스마트 벤치에 적용된 혁신적인 기술들을 직접 확인해 보세요.</p>
         </div>
         <div className="max-w-[120rem] mx-auto px-4">
           <InteractiveFeatureBench />
         </div>
       </section>
 
-      {/* 5. Scenario Gallery — Horizontal Scroll */}
+      {/* 4. Product Specifications & Technical Excellence */}
+      <section className="bg-black py-32 border-t border-white/5">
+        <div className="max-w-[78rem] mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center mb-32">
+            <div className="relative rounded-[2.5rem] overflow-hidden bg-[#111] p-12 border border-white/10 group">
+              <ImageWithFallback src={heroBench} alt="Specs" className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-105" />
+            </div>
+            <div>
+              <h2 className="text-[2.5rem] font-black text-white mb-8 tracking-tight">제품 사양<span className="text-[#0071e3]">.</span></h2>
+              <div className="space-y-6">
+                {technicalSpecs.map(spec => (
+                  <div key={spec.key} className="flex flex-col pb-4 border-b border-white/10">
+                    <span className="text-[10px] font-bold text-[#0071e3] uppercase tracking-widest mb-1">{spec.key}</span>
+                    <span className="text-[1.1rem] text-[#f5f5f7] font-semibold">{spec.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            {featureGuide.map((item, i) => (
+              <div key={i} className="bg-[#111] border border-white/10 p-6 rounded-[2rem] hover:border-[#0071e3]/40 transition-all group min-h-[180px] flex flex-col justify-between">
+                <div className="text-[#98989d] group-hover:text-[#0071e3] transition-colors">{item.icon}</div>
+                <div>
+                  <h4 className="text-[#f5f5f7] font-bold mb-2 text-base">{item.title}</h4>
+                  <p className="text-[#86868b] text-xs break-keep leading-tight">{item.summary}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Infinite Possibilities (Scenario Gallery / Horizontal Scroll) */}
       <section ref={horizontalRef} className="relative bg-black h-[300vh] w-full border-t border-white/5">
         <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
-          <div className="px-6 sm:px-12 lg:px-24 xl:px-40 mb-10 shrink-0 z-20">
+          <div className="px-6 sm:px-12 lg:px-24 xl:px-40 mb-10 shrink-0 z-20 text-center md:text-left">
             <h2 className="text-[#f5f5f7] font-black text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] tracking-tighter uppercase leading-tight">
               무한한 가능성
             </h2>
@@ -246,41 +243,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* 6. Product Specifications & Technical Excellence */}
-      <section className="bg-black py-32 border-t border-white/5">
-        <div className="max-w-[78rem] mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center mb-32">
-            <div className="relative rounded-[2.5rem] overflow-hidden bg-[#111] p-12 border border-white/10 group">
-              <ImageWithFallback src={heroBench} alt="Specs" className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-105" />
-            </div>
-            <div>
-              <h2 className="text-[2.5rem] font-black text-white mb-8 tracking-tight">제품 사양<span className="text-[#0071e3]">.</span></h2>
-              <div className="space-y-6">
-                {technicalSpecs.map(spec => (
-                  <div key={spec.key} className="flex flex-col pb-4 border-b border-white/10">
-                    <span className="text-[10px] font-bold text-[#0071e3] uppercase tracking-widest mb-1">{spec.key}</span>
-                    <span className="text-[1.1rem] text-[#f5f5f7] font-semibold">{spec.value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            {featureGuide.map((item, i) => (
-              <div key={i} className="bg-[#111] border border-white/10 p-6 rounded-[2rem] hover:border-[#0071e3]/40 transition-all group min-h-[180px] flex flex-col justify-between">
-                <div className="text-[#98989d] group-hover:text-[#0071e3] transition-colors">{item.icon}</div>
-                <div>
-                  <h4 className="text-[#f5f5f7] font-bold mb-2 text-base">{item.title}</h4>
-                  <p className="text-[#86868b] text-xs break-keep leading-tight">{item.summary}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 7. Use Cases & Certifications */}
+      {/* 6. Use Cases & Certifications */}
       <section className="bg-black py-32 border-t border-white/5">
         <div className="max-w-[78rem] mx-auto px-6">
           <div className="mb-24">
@@ -318,13 +281,13 @@ export function Home() {
         </div>
       </section>
 
-      {/* 8. Contact Section — One-page Closure (Light Mode) */}
-      <section id="contact" className="bg-[#f5f5f7] py-32">
-        <div className="max-w-[78rem] mx-auto px-6">
-          <div className="bg-white rounded-[3rem] p-12 md:p-20 shadow-2xl border border-[#eaeaea] overflow-hidden relative">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#0071e3]/5 rounded-bl-[100%]"></div>
-            <Contact />
-          </div>
+      {/* 7. Contact Section — Clean White Branding */}
+      <section id="contact" className="bg-[#f5f5f7] py-40 border-t border-[#eaeaea] relative overflow-hidden">
+        {/* Subtle background glow - softer for light theme */}
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#0071e3]/3 rounded-full blur-[120px] pointer-events-none"></div>
+        
+        <div className="max-w-[78rem] mx-auto px-6 relative z-10">
+          <Contact />
         </div>
       </section>
     </div>
