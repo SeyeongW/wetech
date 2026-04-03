@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import { useRef } from "react";
 import { Link } from "react-router";
 import { motion, useScroll, useTransform } from "motion/react";
-import { Cpu, Droplets, Snowflake, Flame, Wifi } from "lucide-react";
+import { Cpu, Droplets, Snowflake, Flame, Wifi, Leaf, PowerOff, ZapOff, Smartphone, ShieldAlert, ShieldCheck, Timer, VolumeX } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { ScrollStorytelling } from "./ScrollStorytelling";
 import benchCity from "../../assets/smart-bench/bench-city.png";
@@ -13,6 +13,14 @@ import featureTempImg from "../../assets/features/temp.png";
 import featureWaterproofImg from "../../assets/features/waterproof.png";
 import featureCondImg from "../../assets/features/condensation.png";
 import featureEffImg from "../../assets/features/efficiency.png";
+import cert1 from "../../assets/smart-bench/certs/cert1.png";
+import cert2 from "../../assets/smart-bench/certs/cert2.png";
+import cert3 from "../../assets/smart-bench/certs/cert3.png";
+import cert4 from "../../assets/smart-bench/certs/cert4.png";
+import cert5 from "../../assets/smart-bench/certs/cert5.png";
+
+import { InteractiveFeatureBench } from "./InteractiveFeatureBench";
+import { Contact } from "./Contact";
 
 const featureCards = [
   {
@@ -37,6 +45,42 @@ const featureCards = [
   },
 ];
 
+const featureGuide = [
+  { icon: <Snowflake className="h-5 w-5" />, title: "결로 방지 기술", summary: "환경 실시간 감지로 결로 방지" },
+  { icon: <Leaf className="h-5 w-5" />, title: "에너지 절감", summary: "모션센서 기반 전력 최적화" },
+  { icon: <PowerOff className="h-5 w-5" />, title: "전원 차단 보호", summary: "침수 시 부품 및 회로 보호" },
+  { icon: <ZapOff className="h-5 w-5" />, title: "과전압 차단", summary: "제어보드 보호 시스템" },
+  { icon: <Smartphone className="h-5 w-5" />, title: "무선 제어", summary: "GPS 타이머 및 원격 관리" },
+  { icon: <ShieldAlert className="h-5 w-5" />, title: "유해물질 차단", summary: "EMF 인증 안전 설계" },
+  { icon: <ShieldCheck className="h-5 w-5" />, title: "전기 안전", summary: "KC 인증 획득" },
+  { icon: <Droplets className="h-5 w-5" />, title: "IP 방수", summary: "실외 환경 완전 대응" },
+  { icon: <Timer className="h-5 w-5" />, title: "자동 타이머", summary: "365일 지능형 가동" },
+  { icon: <VolumeX className="h-5 w-5" />, title: "저소음 설계", summary: "쾌적한 정숙성 유지" },
+];
+
+const technicalSpecs = [
+  { key: "Model", value: "WSBC-2300 / WSBC-2080" },
+  { key: "Rated Voltage", value: "AC 220V, 60Hz" },
+  { key: "Rated Power", value: "WSBC-2300: 530W, WSBC-2080: 490W" },
+  { key: "Control", value: "자동 모드 + 개별 설정 모드" },
+  { key: "Installation", value: "실외 공공공간 표준 규격" },
+];
+
+const useCases = [
+  { title: "공원 및 정원", description: "야외 휴식 밀도가 높은 공간에서 계절별 체감 편차를 최소화합니다." },
+  { title: "대중교통 대기소", description: "버스정류장 등 대기 시간이 발생하는 구간의 시민 만족도를 높입니다." },
+  { title: "관광지 랜드마크", description: "방문객의 체류 편의성을 높여 공간의 품질과 가치를 향상시킵니다." },
+  { title: "국립공원 산책로", description: "장거리 보행 구간의 중간 휴게 포인트로 최적의 회복 환경을 제공합니다." },
+];
+
+const certificates = [
+  { title: "안전확인증명서", image: cert1 },
+  { title: "안전확인증명서", image: cert2 },
+  { title: "방송통신필증", image: cert3 },
+  { title: "특허증(제10-2517070)", image: cert4 },
+  { title: "특허증(제10-2623348)", image: cert5 },
+];
+
 export function Home() {
   const heroStyle = { "--hero-image": `url(${benchCity})` } as CSSProperties;
   
@@ -47,176 +91,242 @@ export function Home() {
   const xOffset = useTransform(scrollPct, (val) => `calc(${val}% + ${-val}vw)`);
 
   return (
-    <div className="spectral-page">
-      {/* Apple-style Hero Section - Dark Mode */}
-      <section className="relative w-full bg-black overflow-hidden flex flex-col items-center pt-40 pb-20 z-10">
-        {/* Cinematic Typographic Header */}
+    <div className="spectral-page bg-black">
+      {/* 1. HERO — Premium Ambient Design */}
+      <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.015]"
+          style={{
+            backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")",
+          }}
+        />
+        
+        {/* Refined Ambient Lighting: Replacing side glows with a subtle top-down spotlight */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            transition={{ duration: 3 }}
+            className="absolute left-1/2 top-[-20%] h-[1000px] w-[1400px] -translate-x-1/2 rounded-full bg-gradient-to-b from-[#0071e3]/20 via-transparent to-transparent blur-[200px]" 
+          />
+          <div className="absolute left-1/2 top-[-5%] h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-white opacity-[0.02] blur-[150px]" />
+        </div>
+
         <motion.div
-          initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 1.4, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="relative z-20 text-center flex flex-col items-center px-4 w-full max-w-7xl mx-auto"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+          className="relative z-10 px-6 text-center max-w-6xl mx-auto"
         >
-          <p className="text-[#f5f5f7] font-semibold text-xl md:text-2xl mb-2 tracking-[0.25em] uppercase opacity-80">
-            스마트 공공시설 <span className="text-[#0052cc] font-black">솔루션</span>
-          </p>
-          <h1 className="text-[5rem] sm:text-[7rem] md:text-[9rem] lg:text-[11rem] font-black tracking-tighter leading-none mb-6 text-transparent bg-clip-text bg-gradient-to-b from-white via-neutral-300 to-neutral-800 drop-shadow-xl">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="mb-8 text-sm sm:text-base font-bold uppercase tracking-[0.6em] text-[#0071e3]/80"
+          >
+            스마트 공공시설 솔루션
+          </motion.p>
+
+          <h1 className="text-[4.5rem] sm:text-[7.5rem] md:text-[11rem] lg:text-[14rem] font-black tracking-[-0.045em] leading-[0.9] mb-10 animate-silver-shine drop-shadow-[0_0_20px_rgba(255,255,255,0.03)] text-white">
             WETECH
           </h1>
-          <p className="text-[#86868b] text-lg md:text-2xl font-medium tracking-tight max-w-2xl mx-auto mb-16">
-            스마트 휴식의 새로운 기준을 제시합니다.
-          </p>
 
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-            className="flex flex-col sm:flex-row items-center gap-4 z-30 mb-12"
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 1.2 }}
+            className="mb-14 text-lg sm:text-2xl text-[#98989d] font-light tracking-wide max-w-lg mx-auto leading-relaxed"
           >
-            <Link to="/contact" className="bg-[#0052cc] text-white hover:bg-[#0042a3] px-8 py-3.5 rounded-full font-bold text-lg tracking-wide transition-all duration-300 shadow-[0_10px_30px_rgba(0,82,204,0.3)] hover:-translate-y-1">
-              도입 문의
-            </Link>
-            <Link to="/about" className="text-[#f5f5f7] hover:text-white hover:underline underline-offset-4 px-6 py-3 font-medium text-lg tracking-wide transition-colors">
-              더 알아보기 {'>'}
-            </Link>
-          </motion.div>
+            스마트 휴식의 <span className="text-[#f5f5f7] font-medium">새로운 기준</span>을 제시합니다.
+          </motion.p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link to="/contact" className="rounded-full bg-[#0071e3] px-10 py-4 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:bg-[#0077ed] hover:scale-105 active:scale-95">도입 문의</Link>
+            <Link to="/products" className="rounded-full border border-white/15 px-10 py-4 text-sm font-medium text-[#f5f5f7] transition-all duration-300 hover:border-white/30 hover:bg-white/5 active:scale-95">제품 살펴보기 →</Link>
+          </div>
         </motion.div>
 
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 3, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 cursor-pointer group"
+          onClick={() => document.getElementById('storytelling')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.4em] text-[#636366] transition-colors group-hover:text-[#f5f5f7]">Scroll</span>
+          <div className="relative h-12 w-px bg-white/10 overflow-hidden">
+            <div className="absolute top-0 left-0 w-full bg-[#0071e3] animate-scroll-line h-full" />
+          </div>
+        </motion.button>
       </section>
 
-      {/* Scrollytelling Section */}
-      <ScrollStorytelling />
+      {/* 2. Scrollytelling Section */}
+      <div id="storytelling">
+        <ScrollStorytelling />
+      </div>
 
-      <section id="overview" className="relative w-full bg-white pt-20 pb-20 border-t border-[#eaeaea]">
-        <div className="w-full flex flex-col justify-center overflow-hidden">
-          
-          <div className="px-6 sm:px-12 lg:px-24 xl:px-40 mb-10 shrink-0 z-20">
-            <h2 className="text-[#1d242a] font-black text-[2.5rem] sm:text-[3.5rem] md:text-[4rem] tracking-tighter uppercase leading-tight opacity-95 drop-shadow-sm">
-              핵심 기능
-            </h2>
-            <p className="text-[#1d242a]/70 text-base sm:text-lg md:text-xl mt-3 tracking-wide max-w-3xl break-keep font-semibold">
-              열전 기반 냉·온열 제어, 결로 대응, 방수 설계 등 공공시설 운영과 이용자 편의에 최적화된 첨단 기능을 제공합니다.
-            </p>
+      {/* 3. Core Features Bento Grid */}
+      <section className="bg-[radial-gradient(circle_at_center,_#0a0a0a_0%,_#000_100%)] py-32 border-t border-white/5">
+        <div className="max-w-[78rem] mx-auto px-6">
+          <div className="mb-20 text-center">
+            <h2 className="text-[2.5rem] md:text-[3.5rem] font-black text-white tracking-tighter uppercase mb-6">Core Technology</h2>
+            <p className="text-[#98989d] text-lg font-medium max-w-2xl mx-auto break-keep">열전 제어, 결로 대응 등 공공시설 운영에 최적화된 첨단 기능을 제공합니다.</p>
           </div>
-
-          <div className="px-6 sm:px-12 lg:px-24 xl:px-40">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-12">
-              {featureCards.map((feature, idx) => (
-                <div key={idx} className="relative rounded-[2rem] p-8 sm:p-10 overflow-hidden group transform-gpu shadow-[0_10px_40px_rgba(0,0,0,0.04)] border border-[#eaeaea] bg-white transition-all duration-300 hover:shadow-[0_20px_50px_rgba(0,82,204,0.08)] hover:-translate-y-1 hover:border-[#0052cc]/30">
-                    <div className="w-12 h-12 rounded-xl bg-[#f8f9fa] text-[#0052cc] flex items-center justify-center mb-8 border border-[#eaeaea] transition-all duration-300 group-hover:bg-[#0052cc] group-hover:text-white shadow-sm">
-                      {feature.icon}
-                    </div>
-                    <h4 className="text-[#1d242a] text-[1.5rem] sm:text-[1.75rem] font-extrabold tracking-tight mb-3 leading-tight">{feature.title}</h4>
-                    <p className="text-[#1d242a]/70 text-[0.95rem] sm:text-[1.05rem] leading-relaxed font-semibold break-keep max-w-lg">
-                      {feature.description}
-                    </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            {featureCards.map((feature, idx) => (
+              <div key={idx} className="relative rounded-[2.5rem] p-10 overflow-hidden group border border-white/10 bg-[#111] transition-all duration-500 hover:border-[#0071e3]/40">
+                <div className="w-14 h-14 rounded-2xl bg-white/5 text-[#0071e3] flex items-center justify-center mb-8 border border-white/10 group-hover:bg-[#0071e3] group-hover:text-white transition-all duration-500">
+                  {feature.icon}
                 </div>
-              ))}
-            </div>
-
-            <div className="flex justify-start">
-              <Link to="/products" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#0052cc] text-white font-extrabold text-[1rem] hover:bg-[#0042a3] shadow-[0_10px_30px_rgba(0,82,204,0.3)] transition-all duration-300 hover:-translate-y-1">
-                제품 상세 기능 보기
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
+                <h4 className="text-[#f5f5f7] text-[1.6rem] font-bold tracking-tight mb-4">{feature.title}</h4>
+                <p className="text-[#86868b] text-[1.1rem] leading-relaxed font-medium break-keep">
+                  {feature.description}
+                </p>
+              </div>
+            ))}
           </div>
-
         </div>
       </section>
 
-      {/* Cinematic Horizontal Scroll Gallery (Ioniq 9 Style - Light Theme) */}
-      <section ref={horizontalRef} className="relative bg-white h-[300vh] w-full border-t border-[#eaeaea]">
+      {/* 4. Interactive Feature Bench */}
+      <section className="bg-[radial-gradient(circle_at_center,_#080808_0%,_#000_100%)] py-24 border-y border-white/5 overflow-hidden">
+        <div className="max-w-[78rem] mx-auto px-4 mb-16 text-center">
+          <h2 className="text-[1.35rem] font-extrabold tracking-[0.1em] text-[#f5f5f7] mb-4 uppercase">WETECH 핵심 기술 탐색</h2>
+          <p className="text-[#98989d] text-[1.1rem] max-w-2xl mx-auto">스마트 벤치에 적용된 혁신적인 기술들을 인터랙티브 모듈로 확인해 보세요.</p>
+        </div>
+        <div className="max-w-[120rem] mx-auto px-4">
+          <InteractiveFeatureBench />
+        </div>
+      </section>
+
+      {/* 5. Scenario Gallery — Horizontal Scroll */}
+      <section ref={horizontalRef} className="relative bg-black h-[300vh] w-full border-t border-white/5">
         <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden">
-          
           <div className="px-6 sm:px-12 lg:px-24 xl:px-40 mb-10 shrink-0 z-20">
-            <h2 className="text-[#1d242a] font-black text-[2.5rem] sm:text-[3.5rem] md:text-[4rem] tracking-tighter uppercase leading-tight opacity-95 drop-shadow-sm">
+            <h2 className="text-[#f5f5f7] font-black text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] tracking-tighter uppercase leading-tight">
               무한한 가능성
             </h2>
-            <p className="text-[#1d242a]/70 text-base sm:text-lg md:text-xl mt-3 tracking-wide max-w-3xl break-keep font-semibold">
-              공원, 대중교통 대기소, 관광지 랜드마크까지. 도시의 맥락에 맞추어 어느 공간이든 압도적인 스마트 휴식 공간으로 변화합니다.
+            <p className="text-[#98989d] text-lg md:text-2xl mt-4 tracking-wide max-w-3xl break-keep font-medium">
+              도시의 어느 공간이든 압도적인 스마트 휴식 공간으로 변화합니다.
             </p>
           </div>
-
           <div className="relative w-full flex items-center">
             <motion.div style={{ x: xOffset }} className="flex gap-6 sm:gap-8 px-6 sm:px-12 lg:px-24 xl:px-40 w-max pb-12 pt-4">
-              
-              {/* Horizontal Panels */}
-              <div className="relative w-[80vw] max-w-[700px] h-[40vh] sm:h-[50vh] rounded-[2rem] overflow-hidden shrink-0 group transform-gpu shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-[#eaeaea] bg-white">
-                <ImageWithFallback src={featureTempImg} alt="Winter Park" className="absolute inset-0 w-full h-[65%] object-cover scale-[1.3] transition-transform duration-[1.5s] ease-[0.22,1,0.36,1] group-hover:scale-[1.4]" />
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/95 to-transparent z-10 pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 p-8 sm:p-10 z-20 w-full">
-                  <span className="inline-block px-3 py-1 bg-[#0052cc]/10 backdrop-blur-md rounded-full text-[#0052cc] text-xs font-black tracking-[0.2em] uppercase mb-3 border border-[#0052cc]/20">
-                    Scenario 01
-                  </span>
-                  <h3 className="text-[#1d242a] text-[1.75rem] sm:text-[2rem] font-extrabold tracking-tight mb-2">도심 공원 및 겨울철 쉼터</h3>
-                  <p className="text-[#1d242a]/70 text-[0.95rem] sm:text-[1.05rem] max-w-lg break-keep leading-relaxed font-semibold">추운 겨울이나 폭설 속에서도 완벽한 단열 및 난방 기능으로 시민들에게 따뜻하고 쾌적한 휴식 공간을 제공합니다.</p>
+              <div className="relative w-[80vw] max-w-[700px] h-[45vh] sm:h-[55vh] rounded-[2.5rem] overflow-hidden shrink-0 group border border-white/10 bg-[#111]">
+                <ImageWithFallback src={featureTempImg} alt="Winter Park" className="absolute inset-0 w-full h-[65%] object-cover scale-[1.3] transition-transform duration-[1.5s] group-hover:scale-[1.4]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/95 to-transparent z-10"></div>
+                <div className="absolute bottom-0 left-0 p-10 z-20 w-full">
+                  <span className="inline-block px-3 py-1 bg-[#0071e3]/10 rounded-full text-[#0071e3] text-[10px] font-black tracking-[0.2em] uppercase mb-4 border border-[#0071e3]/20">Scenario 01</span>
+                  <h3 className="text-[#f5f5f7] text-[1.8rem] md:text-[2.2rem] font-extrabold tracking-tight mb-3">도심 공원 및 겨울철 쉼터</h3>
+                  <p className="text-[#98989d] text-[1.05rem] max-w-lg break-keep font-semibold">폭설 속에서도 완벽한 단열 및 난방 기능으로 시민들에게 따뜻한 휴식을 제공합니다.</p>
                 </div>
               </div>
 
-              <div className="relative w-[80vw] max-w-[700px] h-[40vh] sm:h-[50vh] rounded-[2rem] overflow-hidden shrink-0 group transform-gpu shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-[#eaeaea] bg-white">
-                <ImageWithFallback src={featureWaterproofImg} alt="Rainy City Transit" className="absolute inset-0 w-full h-[65%] object-cover transition-transform duration-[1.5s] ease-[0.22,1,0.36,1] group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/95 to-transparent z-10 pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 p-8 sm:p-10 z-20 w-full">
-                  <span className="inline-block px-3 py-1 bg-[#0052cc]/10 backdrop-blur-md rounded-full text-[#0052cc] text-xs font-black tracking-[0.2em] uppercase mb-3 border border-[#0052cc]/20">
-                    Scenario 02
-                  </span>
-                  <h3 className="text-[#1d242a] text-[1.75rem] sm:text-[2rem] font-extrabold tracking-tight mb-2">스마트 도심 승강장</h3>
-                  <p className="text-[#1d242a]/70 text-[0.95rem] sm:text-[1.05rem] max-w-lg break-keep leading-relaxed font-semibold">거친 폭우와 비바람 속에서도 물을 튕겨내는 방수형 설계로 대중교통 이용객들에게 안전하고 쾌적한 대기 환경을 지원합니다.</p>
+              <div className="relative w-[80vw] max-w-[700px] h-[45vh] sm:h-[55vh] rounded-[2.5rem] overflow-hidden shrink-0 group border border-white/10 bg-[#111]">
+                <ImageWithFallback src={featureWaterproofImg} alt="Long Transit" className="absolute inset-0 w-full h-[65%] object-cover scale-[1.1] transition-transform duration-[1.5s] group-hover:scale-125" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/95 to-transparent z-10"></div>
+                <div className="absolute bottom-0 left-0 p-10 z-20 w-full">
+                  <span className="inline-block px-3 py-1 bg-[#0071e3]/10 rounded-full text-[#0071e3] text-[10px] font-black tracking-[0.2em] uppercase mb-4 border border-[#0071e3]/20">Scenario 02</span>
+                  <h3 className="text-[#f5f5f7] text-[1.8rem] md:text-[2.2rem] font-extrabold tracking-tight mb-3">스마트 도심 승강장</h3>
+                  <p className="text-[#98989d] text-[1.05rem] max-w-lg break-keep font-semibold">폭우 속에서도 물을 튕겨내는 방수 설계로 안전하고 보송한 대기 환경을 지원합니다.</p>
                 </div>
               </div>
 
-              <div className="relative w-[80vw] max-w-[700px] h-[40vh] sm:h-[50vh] rounded-[2rem] overflow-hidden shrink-0 group transform-gpu shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-[#eaeaea] bg-white">
-                <ImageWithFallback src={featureCondImg} alt="Foggy Riverside" className="absolute inset-0 w-full h-[65%] object-cover transition-transform duration-[1.5s] ease-[0.22,1,0.36,1] group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/95 to-transparent z-10 pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 p-8 sm:p-10 z-20 w-full">
-                  <span className="inline-block px-3 py-1 bg-[#0052cc]/10 backdrop-blur-md rounded-full text-[#0052cc] text-xs font-black tracking-[0.2em] uppercase mb-3 border border-[#0052cc]/20">
-                    Scenario 03
-                  </span>
-                  <h3 className="text-[#1d242a] text-[1.75rem] sm:text-[2rem] font-extrabold tracking-tight mb-2">수변 생태 공원 및 산책로</h3>
-                  <p className="text-[#1d242a]/70 text-[0.95rem] sm:text-[1.05rem] max-w-lg break-keep leading-relaxed font-semibold">안개와 습기가 잦은 수변 지역에서도 능동적인 결로 대응 시스템을 통해 365일 보송하고 청결한 표면을 유지합니다.</p>
+              <div className="relative w-[80vw] max-w-[700px] h-[45vh] sm:h-[55vh] rounded-[2.5rem] overflow-hidden shrink-0 group border border-white/10 bg-[#111]">
+                <ImageWithFallback src={featureCondImg} alt="Riverside" className="absolute inset-0 w-full h-[65%] object-cover scale-[1.1] transition-transform duration-[1.5s] group-hover:scale-125" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/95 to-transparent z-10"></div>
+                <div className="absolute bottom-0 left-0 p-10 z-20 w-full">
+                  <span className="inline-block px-3 py-1 bg-[#0071e3]/10 rounded-full text-[#0071e3] text-[10px] font-black tracking-[0.2em] uppercase mb-4 border border-[#0071e3]/20">Scenario 03</span>
+                  <h3 className="text-[#f5f5f7] text-[1.8rem] md:text-[2.2rem] font-extrabold tracking-tight mb-3">수변 생태 공원 산책로</h3>
+                  <p className="text-[#98989d] text-[1.05rem] max-w-lg break-keep font-semibold">습기가 잦은 수변에서도 능동형 결로 대응 시스템으로 365일 청결한 상태를 유지합니다.</p>
                 </div>
               </div>
-
-              <div className="relative w-[80vw] max-w-[700px] h-[40vh] sm:h-[50vh] rounded-[2rem] overflow-hidden shrink-0 group transform-gpu shadow-[0_20px_50px_rgba(0,0,0,0.08)] border border-[#eaeaea] bg-white">
-                <ImageWithFallback src={featureEffImg} alt="Smart City Sunset" className="absolute inset-0 w-full h-[65%] object-cover transition-transform duration-[1.5s] ease-[0.22,1,0.36,1] group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/95 to-transparent z-10 pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 p-8 sm:p-10 z-20 w-full">
-                  <span className="inline-block px-3 py-1 bg-[#0052cc]/10 backdrop-blur-md rounded-full text-[#0052cc] text-xs font-black tracking-[0.2em] uppercase mb-3 border border-[#0052cc]/20">
-                    Scenario 04
-                  </span>
-                  <h3 className="text-[#1d242a] text-[1.75rem] sm:text-[2rem] font-extrabold tracking-tight mb-2">스마트 다목적 광장</h3>
-                  <p className="text-[#1d242a]/70 text-[0.95rem] sm:text-[1.05rem] max-w-lg break-keep leading-relaxed font-semibold">유동인구가 많은 도심 인프라 환경에서 고효율 전력 운용을 통해 미래지향적인 스마트 시티의 풍경을 완성합니다.</p>
-                </div>
-              </div>
-
             </motion.div>
           </div>
         </div>
       </section>
 
+      {/* 6. Product Specifications & Technical Excellence */}
+      <section className="bg-black py-32 border-t border-white/5">
+        <div className="max-w-[78rem] mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center mb-32">
+            <div className="relative rounded-[2.5rem] overflow-hidden bg-[#111] p-12 border border-white/10 group">
+              <ImageWithFallback src={heroBench} alt="Specs" className="w-full h-auto object-contain transition-transform duration-1000 group-hover:scale-105" />
+            </div>
+            <div>
+              <h2 className="text-[2.5rem] font-black text-white mb-8 tracking-tight">제품 사양<span className="text-[#0071e3]">.</span></h2>
+              <div className="space-y-6">
+                {technicalSpecs.map(spec => (
+                  <div key={spec.key} className="flex flex-col pb-4 border-b border-white/10">
+                    <span className="text-[10px] font-bold text-[#0071e3] uppercase tracking-widest mb-1">{spec.key}</span>
+                    <span className="text-[1.1rem] text-[#f5f5f7] font-semibold">{spec.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
 
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            {featureGuide.map((item, i) => (
+              <div key={i} className="bg-[#111] border border-white/10 p-6 rounded-[2rem] hover:border-[#0071e3]/40 transition-all group min-h-[180px] flex flex-col justify-between">
+                <div className="text-[#98989d] group-hover:text-[#0071e3] transition-colors">{item.icon}</div>
+                <div>
+                  <h4 className="text-[#f5f5f7] font-bold mb-2 text-base">{item.title}</h4>
+                  <p className="text-[#86868b] text-xs break-keep leading-tight">{item.summary}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      <section className="spectral-section pt-0 overflow-hidden">
-        <div className="spectral-wrapper style4">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <header className="spectral-major">
-              <h2 className="scroll-follow">Project Inquiry</h2>
-              <p className="scroll-follow scroll-delay-1">설치 예정 공간 정보와 운영 조건을 알려주시면 목적에 맞는 제품 구성을 제안드립니다.</p>
-            </header>
-            <div className="flex flex-wrap gap-3 scroll-follow scroll-delay-2">
-              <Link to="/products" className="spectral-btn">
-                제품 상세
-              </Link>
-              <Link to="/contact" className="spectral-btn">
-                문의하기
-              </Link>
+      {/* 7. Use Cases & Certifications */}
+      <section className="bg-black py-32 border-t border-white/5">
+        <div className="max-w-[78rem] mx-auto px-6">
+          <div className="mb-24">
+            <h2 className="text-[2.5rem] font-black text-white mb-12 tracking-tight text-center">다채로운 공간, <span className="text-[#0071e3]">압도적 경험</span></h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {useCases.map(uc => (
+                <div key={uc.title} className="p-10 rounded-[2.5rem] bg-[#111] border border-white/10 hover:border-[#0071e3]/40 transition-all h-full flex flex-col justify-between group">
+                  <h4 className="text-xl font-bold text-[#f5f5f7] mb-4 group-hover:text-[#0071e3] transition-colors">{uc.title}</h4>
+                  <p className="text-[#98989d] text-[0.95rem] font-semibold leading-relaxed break-keep">{uc.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-[#111] p-12 rounded-[3rem] border border-white/10">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <h3 className="text-2xl font-black text-white mb-6">검증된 안정성</h3>
+                <p className="text-[#98989d] mb-10 leading-relaxed font-medium text-lg">KC 인증부터 특허 등록까지, 모든 기준을 충족했습니다.</p>
+                <div className="flex flex-wrap gap-2">
+                  {certificates.map(c => (
+                    <span key={c.title} className="px-4 py-2 bg-white/5 rounded-full text-xs font-bold text-[#86868b] border border-white/10">{c.title}</span>
+                  ))}
+                </div>
+              </div>
+              <div className="grid grid-cols-3 gap-4">
+                {certificates.map((c, i) => (
+                  <div key={i} className="aspect-[3/4] bg-white/10 rounded-xl p-3 border border-white/10 shadow-sm hover:-translate-y-2 transition-all">
+                    <ImageWithFallback src={c.image} alt={c.title} className="w-full h-full object-contain" />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
-    </div >
+
+      {/* 8. Contact Section — One-page Closure (Light Mode) */}
+      <section id="contact" className="bg-[#f5f5f7] py-32">
+        <div className="max-w-[78rem] mx-auto px-6">
+          <div className="bg-white rounded-[3rem] p-12 md:p-20 shadow-2xl border border-[#eaeaea] overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#0071e3]/5 rounded-bl-[100%]"></div>
+            <Contact />
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }

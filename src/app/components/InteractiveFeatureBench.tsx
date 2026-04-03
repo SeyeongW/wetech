@@ -63,8 +63,8 @@ export function InteractiveFeatureBench() {
   return (
     <div className="relative w-full max-w-[100rem] mx-auto min-h-[600px] flex flex-col items-center justify-center p-4 lg:p-12 overflow-hidden">
       
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-[100%] blur-[120px] pointer-events-none -z-10" style={{ background: "radial-gradient(ellipse, rgba(0,82,204,0.08) 0%, rgba(200,220,250,0.1) 40%, rgba(0,0,0,0) 70%)" }}></div>
+      {/* Background ambient lighting — adjusted for pure black */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] rounded-[100%] blur-[120px] pointer-events-none -z-10" style={{ background: "radial-gradient(ellipse, rgba(0,113,227,0.12) 0%, rgba(0,113,227,0.05) 40%, rgba(0,0,0,0) 70%)" }}></div>
 
       {/* Main Bench Display */}
       <div className="relative w-full max-w-4xl h-[350px] sm:h-[450px] lg:h-[550px] flex items-center justify-center mb-16 isolate">
@@ -73,7 +73,7 @@ export function InteractiveFeatureBench() {
         <ImageWithFallback
           src={bench1Img}
           alt="WETECH Smart Bench Interactive View"
-          className="relative z-10 w-full h-full object-contain drop-shadow-xl mix-blend-multiply transition-transform duration-700 ease-out"
+          className="relative z-10 w-full h-full object-contain drop-shadow-[0_0_30px_rgba(255,255,255,0.05)] transition-transform duration-700 ease-out"
           style={{ transform: activeFeatureId ? "scale(1.02)" : "scale(1)" }}
         />
         
@@ -104,15 +104,15 @@ export function InteractiveFeatureBench() {
                     className="absolute bottom-full left-1/2 -translate-x-1/2 w-max max-w-[240px] sm:max-w-[280px] p-5 rounded-2xl bg-white/90 backdrop-blur-xl border border-[#eaeaea] shadow-[0_20px_40px_rgba(0,0,0,0.08)] z-30 pointer-events-none"
                   >
                     <div className="flex items-center gap-3 mb-2">
-                      <span className="shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-[#0052cc]/10 text-[#0052cc]">
+                      <span className="shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-[#0071e3]/10 text-[#0071e3]">
                         <FeatureIcon className="h-4 w-4" />
                       </span>
-                      <h4 className="text-[1rem] font-extrabold text-[#1d242a] tracking-tight leading-none whitespace-nowrap">{feature.title}</h4>
+                      <h4 className="text-[1rem] font-extrabold text-[#1d1d1f] tracking-tight leading-none whitespace-nowrap">{feature.title}</h4>
                     </div>
-                    <p className="break-keep text-[0.88rem] leading-relaxed text-[#1d242a]/70 m-0 font-medium">{feature.summary}</p>
+                    <p className="break-keep text-[0.88rem] leading-relaxed text-[#1d1d1f]/80 m-0 font-medium">{feature.summary}</p>
                     
                     {/* Tooltip downward arrow */}
-                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 border-b border-r border-[#eaeaea] bg-white/90 backdrop-blur-xl"></div>
+                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rotate-45 border-b border-r border-[#eaeaea] bg-white/95 backdrop-blur-xl"></div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -121,8 +121,8 @@ export function InteractiveFeatureBench() {
               <div
                 className={`relative flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-full backdrop-blur-md transition-all duration-300 ease-out shadow-sm cursor-pointer border ${
                   isActive
-                    ? "bg-[#0052cc] text-white border-transparent scale-110 shadow-md"
-                    : "bg-white text-[#1d242a] border-[#eaeaea] hover:bg-[#0052cc] hover:text-white hover:border-transparent hover:shadow-md"
+                    ? "bg-[#0071e3] text-white border-transparent scale-110 shadow-lg shadow-[#0071e3]/20"
+                    : "bg-white/5 text-[#98989d] border-white/10 hover:bg-white/10 hover:text-[#f5f5f7] hover:border-white/20 shadow-none"
                 } ${isDimmed ? "opacity-30 scale-95" : "opacity-100"}`}
               >
                 {/* Static Icon */}

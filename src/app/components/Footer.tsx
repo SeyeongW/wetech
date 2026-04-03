@@ -1,35 +1,31 @@
-import { Link } from "react-router";
 import { siteConfig } from "../siteConfig";
 
-const links = [
-  { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
-  { to: "/products", label: "Products" },
-  { to: "/contact", label: "Contact" },
+const anchorLinks = [
+  { href: "/#features", label: "핵심 기능" },
+  { href: "/#specs", label: "제품 사양" },
+  { href: "/#usecases", label: "활용 분야" },
+  { href: "/#contact", label: "문의하기" },
 ];
 
 export function Footer() {
-  const scrollTop = () => window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-
   return (
-    <footer className="bg-[#1d242a] px-4 py-12 text-center text-white/70 sm:px-6 lg:px-8">
+    <footer className="bg-[#070b14] border-t border-white/[0.06] px-4 py-14 text-center sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <p className="font-display text-sm tracking-[0.24em] text-white">WETECH</p>
+        <p className="text-sm font-black tracking-[0.3em] text-white">WETECH</p>
         <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-          {links.map((link) => (
-            <li key={link.to}>
-              <Link
-                to={link.to}
-                onClick={scrollTop}
-                className="text-xs uppercase tracking-[0.22em] transition hover:text-white"
+          {anchorLinks.map((link) => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                className="text-xs uppercase tracking-[0.2em] text-white/30 transition hover:text-white"
               >
                 {link.label}
-              </Link>
+              </a>
             </li>
           ))}
         </ul>
-        <p className="mt-8 text-[0.7rem] uppercase tracking-[0.22em] text-white/45">
-          &copy; {new Date().getFullYear()} {siteConfig.company.name}. All rights reserved.
+        <p className="mt-10 text-[0.7rem] uppercase tracking-[0.2em] text-white/20">
+          © {new Date().getFullYear()} {siteConfig.company.name}. All rights reserved.
         </p>
       </div>
     </footer>

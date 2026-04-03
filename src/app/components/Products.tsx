@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import type { CSSProperties } from "react";
 import { Snowflake, Leaf, PowerOff, ZapOff, Smartphone, ShieldAlert, ShieldCheck, Droplets, Timer, VolumeX } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
@@ -75,24 +75,24 @@ export function Products() {
   const headerStyle = { "--page-image": `url(${benchCity})` } as CSSProperties;
 
   return (
-    <div className="spectral-page">
-      <section className="spectral-page-header" style={headerStyle}>
+    <div className="spectral-page bg-black">
+      <section className="spectral-page-header border-b border-white/10" style={headerStyle}>
         <div className="spectral-inner">
           <p className="spectral-kicker text-xs text-white/75 scroll-follow">WETECH Product</p>
           <h1 className="spectral-title text-white scroll-follow scroll-delay-1">제품</h1>
         </div>
       </section>
 
-      <section className="pt-10 pb-20">
+      <section className="pt-10 pb-20 bg-black">
         <div className="max-w-[78rem] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Custom Switcher */}
           <div className="flex justify-center mb-16 scroll-follow">
-            <div className="inline-flex bg-[#f4f6f8] p-1.5 rounded-xl border border-[#eaeaea]">
+            <div className="inline-flex bg-white/5 p-1.5 rounded-xl border border-white/10 backdrop-blur-md">
               <button
                 onClick={() => setActiveTab("overview")}
                 className={`px-8 py-3 rounded-lg text-[0.95rem] font-bold tracking-[0.05em] transition-all duration-300 ${activeTab === "overview"
-                  ? "bg-white text-[#0052cc] shadow-md border border-[#eaeaea] scale-105"
-                  : "text-[#1d242a]/60 hover:text-[#1d242a] hover:bg-black/5"
+                  ? "bg-[#0071e3] text-white shadow-lg shadow-[#0071e3]/20 scale-105"
+                  : "text-[#98989d] hover:text-[#f5f5f7] hover:bg-white/5"
                   }`}
               >
                 개별 기능 설명
@@ -100,8 +100,8 @@ export function Products() {
               <button
                 onClick={() => setActiveTab("features")}
                 className={`px-8 py-3 rounded-lg text-[0.95rem] font-bold tracking-[0.05em] transition-all duration-300 ${activeTab === "features"
-                  ? "bg-white text-[#0052cc] shadow-md border border-[#eaeaea] scale-105"
-                  : "text-[#1d242a]/60 hover:text-[#1d242a] hover:bg-black/5"
+                  ? "bg-[#0071e3] text-white shadow-lg shadow-[#0071e3]/20 scale-105"
+                  : "text-[#98989d] hover:text-[#f5f5f7] hover:bg-white/5"
                   }`}
               >
                 전체 기능 안내
@@ -114,10 +114,10 @@ export function Products() {
           {activeTab === "overview" ? (
             <div className="w-full">
               <header className="mb-12 text-center max-w-[78rem] mx-auto px-4">
-                <h2 className="text-[1.35rem] font-extrabold tracking-[0.1em] text-[#1d242a] mb-4">WETECH 핵심 기술 탐색</h2>
-                <p className="text-[#1d242a]/70 text-[1.05rem]">스마트 벤치에 적용된 혁신적인 기술 아이콘에 마우스를 올려 상세 기능을 확인해 보세요.</p>
+                <h2 className="text-[1.35rem] font-extrabold tracking-[0.1em] text-[#f5f5f7] mb-4">WETECH 핵심 기술 탐색</h2>
+                <p className="text-[#98989d] text-[1.05rem]">스마트 벤치에 적용된 혁신적인 기술 아이콘에 마우스를 올려 상세 기능을 확인해 보세요.</p>
               </header>
-              <div className="w-full bg-[#f8f9fa] border-y border-[#eaeaea] py-16 overflow-hidden">
+              <div className="w-full bg-black border-y border-white/5 py-16 overflow-hidden">
                 <div className="max-w-[120rem] mx-auto px-4">
                   <InteractiveFeatureBench />
                 </div>
@@ -126,31 +126,31 @@ export function Products() {
           ) : (
             <div className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8">
               {/* Product Specifications Section */}
-              <section className="bg-white border border-[#eaeaea] rounded-[2rem] overflow-hidden shadow-sm mb-24">
+              <section className="bg-black border border-white/10 rounded-[2rem] overflow-hidden shadow-sm mb-24">
                 <div className="grid lg:grid-cols-[45%_55%] items-stretch">
-                  <div className="relative p-8 lg:p-12 min-h-[400px] bg-[#f4f6f8] flex items-center justify-center group overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#0052cc]/5 to-transparent z-0"></div>
+                  <div className="relative p-8 lg:p-12 min-h-[400px] bg-[#111111] flex items-center justify-center group overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#0071e3]/5 to-transparent z-0"></div>
                     <ImageWithFallback
                       src={bench4Image}
                       alt="WETECH Smart Bench 기술 구성 이미지"
-                      className="relative z-10 w-full h-full object-contain mix-blend-multiply transition-transform duration-1000 group-hover:scale-105"
+                      className="relative z-10 w-full h-full object-contain transition-transform duration-1000 group-hover:scale-105"
                     />
                   </div>
-                  <div className="flex flex-col justify-center p-8 lg:p-16 bg-white border-l border-[#eaeaea]">
-                    <h2 className="text-[2rem] font-extrabold tracking-tight text-[#1d242a] mb-6 relative inline-block self-start">
+                  <div className="flex flex-col justify-center p-8 lg:p-16 bg-black border-l border-white/10">
+                    <h2 className="text-[2rem] font-extrabold tracking-tight text-[#f5f5f7] mb-6 relative inline-block self-start">
                       제품 사양
-                      <span className="absolute -bottom-2 left-0 w-12 h-1 bg-[#0052cc] rounded-full"></span>
+                      <span className="absolute -bottom-2 left-0 w-12 h-1 bg-[#0071e3] rounded-full"></span>
                     </h2>
-                    <p className="mt-2 text-[1.05rem] leading-relaxed text-[#1d242a]/80 break-keep mb-8">
+                    <p className="mt-2 text-[1.05rem] leading-relaxed text-[#98989d] break-keep mb-8">
                       WETECH Smart Bench는 냉·온열 제어, 결로 대응, 실외 안전 운용을 중심으로 설계된 공공공간용 차세대 설비입니다. 현장의 운영 정책(시간/온도/환경)에 따라 맞춤형 운전 모드를 구성할 수 있습니다.
                     </p>
 
-                    <div className="bg-[#f8f9fa] rounded-2xl p-6 md:p-8 border border-[#eaeaea]">
+                    <div className="bg-[#111111] rounded-2xl p-6 md:p-8 border border-white/5">
                       <dl className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
                         {technicalSpecs.map((spec) => (
-                          <div key={spec.key} className="flex flex-col pb-4 border-b border-[#eaeaea] md:border-b-0 md:pb-0">
-                            <dt className="text-sm font-bold text-[#0052cc] uppercase tracking-wider mb-2">{spec.key}</dt>
-                            <dd className="text-[0.95rem] font-medium text-[#1d242a] leading-relaxed break-keep">{spec.value}</dd>
+                          <div key={spec.key} className="flex flex-col pb-4 border-b border-white/10 md:border-b-0 md:pb-0">
+                            <dt className="text-sm font-bold text-[#0071e3] uppercase tracking-wider mb-2">{spec.key}</dt>
+                            <dd className="text-[0.95rem] font-medium text-[#f5f5f7] leading-relaxed break-keep">{spec.value}</dd>
                           </div>
                         ))}
                       </dl>
@@ -161,11 +161,11 @@ export function Products() {
 
               {/* 10 Key Features Bento Box */}
               <div className="text-center mb-12 lg:mb-16">
-                <h2 className="text-[2rem] font-extrabold tracking-tight text-[#1d242a] mb-5 relative inline-block">
+                <h2 className="text-[2rem] font-extrabold tracking-tight text-[#f5f5f7] mb-5 relative inline-block">
                   주요 기술 가이드
-                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[#0052cc] rounded-full"></div>
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-12 h-1 bg-[#0071e3] rounded-full"></div>
                 </h2>
-                <p className="text-[#1d242a]/70 text-[1.05rem] max-w-2xl mx-auto leading-relaxed break-keep mt-6">
+                <p className="text-[#98989d] text-[1.05rem] max-w-2xl mx-auto leading-relaxed break-keep mt-6">
                   도입 시 필수적으로 검토되는 10가지 핵심 기술을 안내합니다.
                 </p>
               </div>
@@ -174,23 +174,23 @@ export function Products() {
                 {featureGuide.map((item, index) => (
                   <div
                     key={item.title}
-                    className="group relative bg-white border border-[#eaeaea] hover:border-[#0052cc]/30 rounded-3xl p-6 sm:p-8 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-400 overflow-hidden cursor-default flex flex-col justify-between min-h-[240px]"
+                    className="group relative bg-black border border-white/10 hover:border-[#0071e3]/30 rounded-3xl p-6 sm:p-8 hover:shadow-[0_8px_30px_rgba(0,113,227,0.06)] hover:-translate-y-1 transition-all duration-400 overflow-hidden cursor-default flex flex-col justify-between min-h-[240px]"
                   >
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#0052cc]/5 to-transparent rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-700"></div>
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#0071e3]/5 to-transparent rounded-bl-full -z-10 group-hover:scale-125 transition-transform duration-700"></div>
                     <div>
                       <div className="flex items-center justify-between mb-6">
-                        <span className="text-4xl font-extrabold text-[#1d242a]/5 group-hover:text-[#0052cc]/10 transition-colors duration-500">
+                        <span className="text-4xl font-extrabold text-white/5 group-hover:text-[#0071e3]/10 transition-colors duration-500">
                           {String(index + 1).padStart(2, '0')}
                         </span>
-                        <div className="w-12 h-12 rounded-2xl bg-[#f8f9fa] flex items-center justify-center text-[#1d242a]/60 group-hover:bg-[#0052cc] group-hover:text-white transition-all duration-300 shadow-sm border border-[#eaeaea] group-hover:border-transparent">
+                        <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-[#98989d] group-hover:bg-[#0071e3] group-hover:text-white transition-all duration-300 shadow-sm border border-white/10 group-hover:border-transparent">
                           {item.icon}
                         </div>
                       </div>
-                      <h4 className="text-[1.15rem] font-bold text-[#1d242a] mb-3 group-hover:text-[#0052cc] transition-colors duration-300">
+                      <h4 className="text-[1.15rem] font-bold text-[#f5f5f7] mb-3 group-hover:text-[#0071e3] transition-colors duration-300">
                         {item.title}
                       </h4>
                     </div>
-                    <p className="text-[#1d242a]/70 leading-relaxed text-[0.95rem] break-keep font-medium">
+                    <p className="text-[#98989d] leading-relaxed text-[0.95rem] break-keep font-medium">
                       {item.summary}
                     </p>
                   </div>
